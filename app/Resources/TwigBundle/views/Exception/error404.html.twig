@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="image-container set-full-height" style="background-image: url({{ asset('assets/img/louvre.jpg') }})">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <!--      Wizard container        -->
+                    <div class="wizard-container">
+                        <div class="card wizard-card">
+                            <div class="tab-content erreur">
+                                <div class="wizard-header">
+                                    <h3 class="wizard-title">ERREUR 404</h3>
+                                    <h5>Cette page n'existe pas.</h5>
+                                    <h5>Retourner à l'<a href="{{path('homepage')}}">accueil</a> du site.</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
