@@ -1,9 +1,140 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <div class="jumbotron">
-            <h1>Work in progress...</h1>
+    <div class="image-container set-full-height" style="background-image: url('assets/img/louvre.jpg')">
+        <!--   Ajouter logo et « Billetterie officielle du Louvre (sur fond noir ?) + baisser le panneau  -->
+
+        <!--   Big container   -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <!--      Wizard container        -->
+                    <div class="wizard-container">
+                        <div class="card wizard-card" data-color="red" id="wizard">
+                            <form action="" method="">
+                                <div class="wizard-header">
+                                    <h3 class="wizard-title">
+                                        Réservation
+                                    </h3>
+                                    <h5>Suivez les trois étapes et réglez&nbsp;!</h5>
+                                </div>
+                                <div class="wizard-navigation">
+                                    <ul>
+                                        <li><a href="#date" data-toggle="tab">Date</a></li>
+                                        <li><a href="#tickets" data-toggle="tab">Billets</a></li>
+                                        <li><a href="#description" data-toggle="tab">Visiteurs</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="tab-content">
+                                    <div class="tab-pane" id="date">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h4 class="info-text">Commencez par choisir la date de votre visite.</h4>
+                                            </div>
+                                            <div class="text-center">
+                                                <div>Insérer ici le datepicker</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tickets">
+                                        <h4 class="info-text">Indiquez le type de billet souhaité (plusieurs choix possibles).</h4>
+                                        <div class="row">
+                                            <div class="col-sm-10 col-sm-offset-1">
+                                                <div class="col-sm-4">
+                                                    <div class="choice" data-toggle="wizard-checkbox" rel="tooltip" title="À partir de 4 ans et jusqu’à 12 ans.">
+                                                        <input type="checkbox" name="ticket" value="child">
+                                                        <div class="icon">
+                                                            <i class="material-icons">person</i>
+                                                        </div>
+                                                        <h6>Enfant – 8 €</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="choice" data-toggle="wizard-checkbox" rel="tooltip" title="À partir de 12 ans.">
+                                                        <input type="checkbox" name="ticket" value="normal">
+                                                        <div class="icon">
+                                                            <i class="material-icons">person</i>
+                                                        </div>
+                                                        <h6>Normal – 16 €</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="choice" data-toggle="wizard-checkbox" rel="tooltip" title="À partir de 60 ans.">
+                                                        <input type="checkbox" name="ticket" value="senior">
+                                                        <div class="icon">
+                                                            <i class="material-icons">person</i>
+                                                        </div>
+                                                        <h6>Senior – 12 €</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="choice" data-toggle="wizard-checkbox" rel="tooltip" title="Étudiant, employé du musée, d’un service du Ministère de la Culture, militaire, demandeur d'emploi.">
+                                                        <input type="checkbox" name="ticket" value="reduced">
+                                                        <div class="icon">
+                                                            <i class="material-icons">person</i>
+                                                        </div>
+                                                        <h6>Réduit – 10 €</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="choice" data-toggle="wizard-checkbox" rel="tooltip" title="Deux adultes et deux enfants ayant le même nom de famille.">
+                                                        <input type="checkbox" name="ticket" value="family">
+                                                        <div class="icon">
+                                                            <i class="material-icons">group</i>
+                                                        </div>
+                                                        <h6>Famille – 35 €</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="description">
+                                        <div class="row">
+                                            <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
+                                                <div class="input-group">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Prénom</label>
+                                                        <input name="firstname" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Nom</label>
+                                                        <input name="lastname" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Date de naissance</label>
+                                                        <input name="birthday" type="date" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wizard-footer">
+                                    <div class="pull-right">
+                                        <input type='button' class='btn btn-next btn-fill btn-danger btn-wd' name='next' value='Étape suivante' />
+                                        <input type='button' class='btn btn-finish btn-fill btn-danger btn-wd' name='finish' value='Payer' />
+                                    </div>
+                                    <div class="pull-left">
+                                        <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Étape précédente' />
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div> <!-- wizard container -->
+                </div>
+            </div> <!-- row -->
+        </div> <!--  big container -->
+
+        <div class="footer">
+            <div class="container text-center">
+                © 2016 – Sébastien Pereda
+            </div>
         </div>
     </div>
 {% endblock %}
