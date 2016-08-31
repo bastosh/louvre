@@ -5,7 +5,7 @@
     "description": "symfony 3 web development training project",
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "App\\": "src/"
         },
         "classmap": [
             "app/AppKernel.php",
