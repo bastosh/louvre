@@ -181,7 +181,6 @@ h2.title {
   font-weight: 500; }
 
 .card {
-  background-color: #FFFFFF;
   padding: 10px 0;
   width: 100%;
   border-radius: 6px;
@@ -315,7 +314,7 @@ h2.title {
   .wizard-card .picture-src {
     width: 100%; }
   .wizard-card .tab-content {
-    min-height: 340px;
+    min-height: 415px;
     padding: 20px 15px; }
   .wizard-card .wizard-footer {
     padding: 0 15px; }

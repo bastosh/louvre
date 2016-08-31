@@ -18,16 +18,25 @@
         <!-- CSS Files -->
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('assets/css/material-bootstrap-wizard.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker.css') }}" />
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     {% endblock %}
 </head>
 <body>
 {% block body %}{% endblock %}
+{% block javascripts %}
 <script src="{{ asset('assets/js/jquery-2.2.4.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.bootstrap.js') }}"></script>
 <script src="{{ asset('assets/js/material-bootstrap-wizard.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
-{% block javascripts %}{% endblock %}
+<script type="text/javascript">
+    $('.datepicker').datepicker({
+        weekStart:1,
+        color: 'red'
+    });
+</script>
+{% endblock %}
 </body>
 </html>
