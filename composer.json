@@ -2,10 +2,10 @@
     "name": "pereda/louvre",
     "license": "proprietary",
     "type": "project",
-    "description": "symfony 3 web development training project",
+    "description": "Symfony 3 web development training project",
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "": "src/"
         },
         "classmap": [
             "app/AppKernel.php",
