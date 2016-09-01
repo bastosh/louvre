@@ -36,7 +36,10 @@
                                                 <div class="col-sm-4"></div>
                                                 <div class="col-xs-6 col-xs-offset-3">
                                                     <div class="controls">
-                                                        <input class="datepicker form-control" type="text" />
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Date de la visite</label>
+                                                            <input name="day" class="datepicker form-control" type="text" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4"></div>
@@ -48,7 +51,7 @@
                                         <div class="row">
                                             <div class="col-sm-10 col-sm-offset-1">
                                                 <div class="col-sm-4">
-                                                    <div class="choice" data-toggle="wizard-checkbox" rel="tooltip" title="À partir de 4 ans et jusqu’à 12 ans.">
+                                                    <div class="choice" data-toggle="modal" data-target="#form-solo" rel="tooltip" title="À partir de 4 ans et jusqu’à 12 ans.">
                                                         <input type="checkbox" name="ticket" value="child">
                                                         <div class="icon">
                                                             <i class="material-icons">person</i>
@@ -57,7 +60,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <div class="choice" data-toggle="wizard-checkbox" rel="tooltip" title="À partir de 12 ans.">
+                                                    <div class="choice" data-toggle="modal" data-target="#form-solo" rel="tooltip" title="À partir de 12 ans.">
                                                         <input type="checkbox" name="ticket" value="normal">
                                                         <div class="icon">
                                                             <i class="material-icons">person</i>
@@ -66,7 +69,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <div class="choice" data-toggle="wizard-checkbox" rel="tooltip" title="À partir de 60 ans.">
+                                                    <div class="choice" data-toggle="modal" data-target="#form-solo" rel="tooltip" title="À partir de 60 ans.">
                                                         <input type="checkbox" name="ticket" value="senior">
                                                         <div class="icon">
                                                             <i class="material-icons">person</i>
@@ -75,7 +78,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4 col-sm-offset-2">
-                                                    <div class="choice" data-toggle="wizard-checkbox" rel="tooltip" title="Étudiant, employé du musée, d’un service du Ministère de la Culture, militaire, demandeur d'emploi.">
+                                                    <div class="choice" data-toggle="modal" data-target="#form-solo" rel="tooltip" title="Étudiant, employé du musée, d’un service du Ministère de la Culture, militaire, demandeur d'emploi.">
                                                         <input type="checkbox" name="ticket" value="reduced">
                                                         <div class="icon">
                                                             <i class="material-icons">person</i>
@@ -84,12 +87,248 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <div class="choice" data-toggle="wizard-checkbox" rel="tooltip" title="Deux adultes et deux enfants ayant le même nom de famille.">
+                                                    <div class="choice" data-toggle="modal" data-target="#form-family" rel="tooltip" title="Deux adultes et deux enfants ayant le même nom de famille.">
                                                         <input type="checkbox" name="ticket" value="family">
                                                         <div class="icon">
                                                             <i class="material-icons">group</i>
                                                         </div>
                                                         <h6>Famille – 35 €</h6>
+                                                    </div>
+                                                </div>
+                                                <!-- Modal solo -->
+                                                <div class="modal fade" id="form-solo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                <h4 class="modal-title" id="myModalLabel">Billet individuel</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <h4 class="info-text">Renseignez les informations suivantes pour ajouter le billet au panier&nbsp;:</h4>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="input-group">
+                                                                            <div class="form-group label-floating">
+                                                                                <label class="control-label">Prénom du visiteur</label>
+                                                                                <input name="firstname" type="text" class="form-control">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="input-group">
+                                                                            <div class="form-group label-floating">
+                                                                                <label class="control-label">Nom du visiteur</label>
+                                                                                <input name="lastname" type="text" class="form-control">
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group label-floating">
+                                                                            <label class="control-label">Pays</label>
+                                                                            <select class="form-control">
+                                                                                <option disabled="" selected=""></option>
+                                                                                <option value="Allemagne"> Allemagne </option>
+                                                                                <option value="Angleterre"> Angleterre </option>
+                                                                                <option value="Belgique"> Belgique </option>
+                                                                                <option value="Chine"> Chine </option>
+                                                                                <option value="Espagne"> Espagne </option>
+                                                                                <option value="États-Unis"> États-Unis </option>
+                                                                                <option value="France"> France </option>
+                                                                                <option value="Italie"> Italie </option>
+                                                                                <option value="Japon"> Japon </option>
+                                                                                <option value="Russie"> Russie </option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group label-floating">
+                                                                            <label class="control-label is-focused">Date de naissance (jj/mm/aaaa)</label>
+                                                                            <input name="birthday" type="text" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                                                <button type="button" class="btn btn-primary">Ajouter au panier</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Modal family -->
+                                                <div class="modal fade" id="form-family" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                <h4 class="modal-title" id="myModalLabel">Billet famille</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <h4 class="info-text">Renseignez les informations suivantes pour ajouter le billet au panier&nbsp;:</h4>
+                                                                    </div>
+                                                                    <h3 class="text-center">ADULTE 1</h3>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="input-group">
+                                                                            <div class="form-group label-floating">
+                                                                                <label class="control-label">Prénom du visiteur</label>
+                                                                                <input name="firstname" type="text" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="input-group">
+                                                                            <div class="form-group label-floating">
+                                                                                <label class="control-label">Nom du visiteur</label>
+                                                                                <input name="lastname" type="text" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group label-floating">
+                                                                            <label class="control-label">Pays</label>
+                                                                            <select class="form-control">
+                                                                                <option disabled="" selected=""></option>
+                                                                                <option value="Allemagne"> Allemagne </option>
+                                                                                <option value="Angleterre"> Angleterre </option>
+                                                                                <option value="Belgique"> Belgique </option>
+                                                                                <option value="Chine"> Chine </option>
+                                                                                <option value="Espagne"> Espagne </option>
+                                                                                <option value="États-Unis"> États-Unis </option>
+                                                                                <option value="France"> France </option>
+                                                                                <option value="Italie"> Italie </option>
+                                                                                <option value="Japon"> Japon </option>
+                                                                                <option value="Russie"> Russie </option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group label-floating">
+                                                                            <label class="control-label is-focused">Date de naissance (jj/mm/aaaa)</label>
+                                                                            <input name="birthday" type="text" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <h3 class="text-center">ADULTE 2</h3>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="input-group">
+                                                                            <div class="form-group label-floating">
+                                                                                <label class="control-label">Prénom du visiteur</label>
+                                                                                <input name="firstname" type="text" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="input-group">
+                                                                            <div class="form-group label-floating">
+                                                                                <label class="control-label">Nom du visiteur</label>
+                                                                                <input name="lastname" type="text" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group label-floating">
+                                                                            <label class="control-label">Pays</label>
+                                                                            <select class="form-control">
+                                                                                <option disabled="" selected=""></option>
+                                                                                <option value="Allemagne"> Allemagne </option>
+                                                                                <option value="Angleterre"> Angleterre </option>
+                                                                                <option value="Belgique"> Belgique </option>
+                                                                                <option value="Chine"> Chine </option>
+                                                                                <option value="Espagne"> Espagne </option>
+                                                                                <option value="États-Unis"> États-Unis </option>
+                                                                                <option value="France"> France </option>
+                                                                                <option value="Italie"> Italie </option>
+                                                                                <option value="Japon"> Japon </option>
+                                                                                <option value="Russie"> Russie </option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group label-floating">
+                                                                            <label class="control-label is-focused">Date de naissance (jj/mm/aaaa)</label>
+                                                                            <input name="birthday" type="text" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <h3 class="text-center">ENFANT 1</h3>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="input-group">
+                                                                            <div class="form-group label-floating">
+                                                                                <label class="control-label">Prénom du visiteur</label>
+                                                                                <input name="firstname" type="text" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="input-group">
+                                                                            <div class="form-group label-floating">
+                                                                                <label class="control-label">Nom du visiteur</label>
+                                                                                <input name="lastname" type="text" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group label-floating">
+                                                                            <label class="control-label">Pays</label>
+                                                                            <select class="form-control">
+                                                                                <option disabled="" selected=""></option>
+                                                                                <option value="Allemagne"> Allemagne </option>
+                                                                                <option value="Angleterre"> Angleterre </option>
+                                                                                <option value="Belgique"> Belgique </option>
+                                                                                <option value="Chine"> Chine </option>
+                                                                                <option value="Espagne"> Espagne </option>
+                                                                                <option value="États-Unis"> États-Unis </option>
+                                                                                <option value="France"> France </option>
+                                                                                <option value="Italie"> Italie </option>
+                                                                                <option value="Japon"> Japon </option>
+                                                                                <option value="Russie"> Russie </option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group label-floating">
+                                                                            <label class="control-label is-focused">Date de naissance (jj/mm/aaaa)</label>
+                                                                            <input name="birthday" type="text" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <h3 class="text-center">ENFANT 1</h3>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="input-group">
+                                                                            <div class="form-group label-floating">
+                                                                                <label class="control-label">Prénom du visiteur</label>
+                                                                                <input name="firstname" type="text" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="input-group">
+                                                                            <div class="form-group label-floating">
+                                                                                <label class="control-label">Nom du visiteur</label>
+                                                                                <input name="lastname" type="text" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group label-floating">
+                                                                            <label class="control-label">Pays</label>
+                                                                            <select class="form-control">
+                                                                                <option disabled="" selected=""></option>
+                                                                                <option value="Allemagne"> Allemagne </option>
+                                                                                <option value="Angleterre"> Angleterre </option>
+                                                                                <option value="Belgique"> Belgique </option>
+                                                                                <option value="Chine"> Chine </option>
+                                                                                <option value="Espagne"> Espagne </option>
+                                                                                <option value="États-Unis"> États-Unis </option>
+                                                                                <option value="France"> France </option>
+                                                                                <option value="Italie"> Italie </option>
+                                                                                <option value="Japon"> Japon </option>
+                                                                                <option value="Russie"> Russie </option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group label-floating">
+                                                                            <label class="control-label is-focused">Date de naissance (jj/mm/aaaa)</label>
+                                                                            <input name="birthday" type="text" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                                                <button type="button" class="btn btn-primary">Ajouter au panier</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
