@@ -18,7 +18,7 @@
         <!-- CSS Files -->
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('assets/css/material-bootstrap-wizard.css') }}" />
-        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker2.css') }}" />
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     {% endblock %}
 </head>
@@ -29,12 +29,21 @@
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.bootstrap.js') }}"></script>
 <script src="{{ asset('assets/js/material-bootstrap-wizard.js') }}"></script>
-<script src="{{ asset('assets/js/bootstrap-datepicker.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap-datepicker2.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap-datepicker.fr.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
 <script type="text/javascript">
     $('.datepicker').datepicker({
-        weekStart:1,
-        color: 'red'
+        orientation: 'bottom',
+        language: 'fr',
+        startDate: 'today',
+        todayHighlight: true,
+        daysOfWeekDisabled: [0,2],
+        datesDisabled: ['01/05/2017', '01/11/2017', '25/12/2017', '01/05/2019', '01/11/2019', '25/12/2019', '01/05/2020', '25/12/2020'],
+        templates: {
+            leftArrow: '<i class="fa fa-chevron-left"></i>',
+            rightArrow: '<i class="fa fa-chevron-right"></i>'
+        }
     });
 </script>
 {% endblock %}

@@ -22,7 +22,7 @@
                                     <ul>
                                         <li><a href="#date" data-toggle="tab">Date</a></li>
                                         <li><a href="#tickets" data-toggle="tab">Billets</a></li>
-                                        <li><a href="#description" data-toggle="tab">Visiteurs</a></li>
+                                        <li><a href="#description" data-toggle="tab">Confirmation</a></li>
                                     </ul>
                                 </div>
 
@@ -30,13 +30,13 @@
                                     <div class="tab-pane" id="date">
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <h4 class="info-text">Commencez par choisir la date de votre visite.</h4>
+                                                <h4 class="info-text">Choisissez la date de votre visite.</h4>
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-4"></div>
-                                                <div class="col-xs-12 col-sm-4">
+                                                <div class="col-xs-6 col-xs-offset-3">
                                                     <div class="controls">
-                                                        <input class="datepicker form-control" type="text"/>
+                                                        <input class="datepicker form-control" type="text" />
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4"></div>
@@ -44,7 +44,7 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="tickets">
-                                        <h4 class="info-text">Indiquez le type de billet souhaité (plusieurs choix possibles).</h4>
+                                        <h4 class="info-text">Pour chaque visiteur, sélectionnez le type de billet, entrez les informations demandées et ajoutez le billet au panier.</h4>
                                         <div class="row">
                                             <div class="col-sm-10 col-sm-offset-1">
                                                 <div class="col-sm-4">
@@ -74,7 +74,7 @@
                                                         <h6>Senior – 12 €</h6>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-4 col-sm-offset-2">
                                                     <div class="choice" data-toggle="wizard-checkbox" rel="tooltip" title="Étudiant, employé du musée, d’un service du Ministère de la Culture, militaire, demandeur d'emploi.">
                                                         <input type="checkbox" name="ticket" value="reduced">
                                                         <div class="icon">
@@ -97,25 +97,9 @@
                                     </div>
                                     <div class="tab-pane" id="description">
                                         <div class="row">
-                                            <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
-                                                <div class="input-group">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Prénom</label>
-                                                        <input name="firstname" type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="input-group">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Nom</label>
-                                                        <input name="lastname" type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="input-group">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Date de naissance</label>
-                                                        <input name="birthday" type="date" class="form-control">
-                                                    </div>
-                                                </div>
+                                            <h4 class="info-text">Vérifiez les informations et réglez votre commande !</h4>
+                                            <div class="text-center col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
+                                                <p>Affiche le récapitulatif des billets et le montant de la commande.</p>
                                             </div>
                                         </div>
                                     </div>
