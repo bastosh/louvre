@@ -101,51 +101,14 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                <h4 class="modal-title" id="myModalLabel">Billet individuel</h4>
+                                                                <h3 class="modal-title" id="myModalLabel">Billet individuel</h3>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
                                                                     <div class="col-sm-12">
                                                                         <h4 class="info-text">Renseignez les informations suivantes pour ajouter le billet au panier&nbsp;:</h4>
                                                                     </div>
-                                                                    <div class="col-sm-6">
-                                                                        <div class="input-group">
-                                                                            <div class="form-group label-floating">
-                                                                                <label class="control-label">Prénom du visiteur</label>
-                                                                                <input name="firstname" type="text" class="form-control">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="input-group">
-                                                                            <div class="form-group label-floating">
-                                                                                <label class="control-label">Nom du visiteur</label>
-                                                                                <input name="lastname" type="text" class="form-control">
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="col-sm-6">
-                                                                        <div class="form-group label-floating">
-                                                                            <label class="control-label">Pays</label>
-                                                                            <select class="form-control">
-                                                                                <option disabled="" selected=""></option>
-                                                                                <option value="Allemagne"> Allemagne </option>
-                                                                                <option value="Angleterre"> Angleterre </option>
-                                                                                <option value="Belgique"> Belgique </option>
-                                                                                <option value="Chine"> Chine </option>
-                                                                                <option value="Espagne"> Espagne </option>
-                                                                                <option value="États-Unis"> États-Unis </option>
-                                                                                <option value="France"> France </option>
-                                                                                <option value="Italie"> Italie </option>
-                                                                                <option value="Japon"> Japon </option>
-                                                                                <option value="Russie"> Russie </option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="form-group label-floating">
-                                                                            <label class="control-label is-focused">Date de naissance (jj/mm/aaaa)</label>
-                                                                            <input name="birthday" type="text" class="form-control">
-                                                                        </div>
-                                                                    </div>
+                                                                    {% include 'form/visitor.html.twig' %}
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -161,7 +124,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                <h4 class="modal-title" id="myModalLabel">Billet famille</h4>
+                                                                <h3 class="modal-title" id="myModalLabel">Billet famille</h3>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
@@ -169,159 +132,13 @@
                                                                         <h4 class="info-text">Renseignez les informations suivantes pour ajouter le billet au panier&nbsp;:</h4>
                                                                     </div>
                                                                     <h3 class="text-center">ADULTE 1</h3>
-                                                                    <div class="col-sm-6">
-                                                                        <div class="input-group">
-                                                                            <div class="form-group label-floating">
-                                                                                <label class="control-label">Prénom du visiteur</label>
-                                                                                <input name="firstname" type="text" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="input-group">
-                                                                            <div class="form-group label-floating">
-                                                                                <label class="control-label">Nom du visiteur</label>
-                                                                                <input name="lastname" type="text" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-sm-6">
-                                                                        <div class="form-group label-floating">
-                                                                            <label class="control-label">Pays</label>
-                                                                            <select class="form-control">
-                                                                                <option disabled="" selected=""></option>
-                                                                                <option value="Allemagne"> Allemagne </option>
-                                                                                <option value="Angleterre"> Angleterre </option>
-                                                                                <option value="Belgique"> Belgique </option>
-                                                                                <option value="Chine"> Chine </option>
-                                                                                <option value="Espagne"> Espagne </option>
-                                                                                <option value="États-Unis"> États-Unis </option>
-                                                                                <option value="France"> France </option>
-                                                                                <option value="Italie"> Italie </option>
-                                                                                <option value="Japon"> Japon </option>
-                                                                                <option value="Russie"> Russie </option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="form-group label-floating">
-                                                                            <label class="control-label is-focused">Date de naissance (jj/mm/aaaa)</label>
-                                                                            <input name="birthday" type="text" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
+                                                                    {% include 'form/visitor.html.twig' %}
                                                                     <h3 class="text-center">ADULTE 2</h3>
-                                                                    <div class="col-sm-6">
-                                                                        <div class="input-group">
-                                                                            <div class="form-group label-floating">
-                                                                                <label class="control-label">Prénom du visiteur</label>
-                                                                                <input name="firstname" type="text" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="input-group">
-                                                                            <div class="form-group label-floating">
-                                                                                <label class="control-label">Nom du visiteur</label>
-                                                                                <input name="lastname" type="text" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-sm-6">
-                                                                        <div class="form-group label-floating">
-                                                                            <label class="control-label">Pays</label>
-                                                                            <select class="form-control">
-                                                                                <option disabled="" selected=""></option>
-                                                                                <option value="Allemagne"> Allemagne </option>
-                                                                                <option value="Angleterre"> Angleterre </option>
-                                                                                <option value="Belgique"> Belgique </option>
-                                                                                <option value="Chine"> Chine </option>
-                                                                                <option value="Espagne"> Espagne </option>
-                                                                                <option value="États-Unis"> États-Unis </option>
-                                                                                <option value="France"> France </option>
-                                                                                <option value="Italie"> Italie </option>
-                                                                                <option value="Japon"> Japon </option>
-                                                                                <option value="Russie"> Russie </option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="form-group label-floating">
-                                                                            <label class="control-label is-focused">Date de naissance (jj/mm/aaaa)</label>
-                                                                            <input name="birthday" type="text" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
+                                                                    {% include 'form/visitor.html.twig' %}
                                                                     <h3 class="text-center">ENFANT 1</h3>
-                                                                    <div class="col-sm-6">
-                                                                        <div class="input-group">
-                                                                            <div class="form-group label-floating">
-                                                                                <label class="control-label">Prénom du visiteur</label>
-                                                                                <input name="firstname" type="text" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="input-group">
-                                                                            <div class="form-group label-floating">
-                                                                                <label class="control-label">Nom du visiteur</label>
-                                                                                <input name="lastname" type="text" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-sm-6">
-                                                                        <div class="form-group label-floating">
-                                                                            <label class="control-label">Pays</label>
-                                                                            <select class="form-control">
-                                                                                <option disabled="" selected=""></option>
-                                                                                <option value="Allemagne"> Allemagne </option>
-                                                                                <option value="Angleterre"> Angleterre </option>
-                                                                                <option value="Belgique"> Belgique </option>
-                                                                                <option value="Chine"> Chine </option>
-                                                                                <option value="Espagne"> Espagne </option>
-                                                                                <option value="États-Unis"> États-Unis </option>
-                                                                                <option value="France"> France </option>
-                                                                                <option value="Italie"> Italie </option>
-                                                                                <option value="Japon"> Japon </option>
-                                                                                <option value="Russie"> Russie </option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="form-group label-floating">
-                                                                            <label class="control-label is-focused">Date de naissance (jj/mm/aaaa)</label>
-                                                                            <input name="birthday" type="text" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <h3 class="text-center">ENFANT 1</h3>
-                                                                    <div class="col-sm-6">
-                                                                        <div class="input-group">
-                                                                            <div class="form-group label-floating">
-                                                                                <label class="control-label">Prénom du visiteur</label>
-                                                                                <input name="firstname" type="text" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="input-group">
-                                                                            <div class="form-group label-floating">
-                                                                                <label class="control-label">Nom du visiteur</label>
-                                                                                <input name="lastname" type="text" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-sm-6">
-                                                                        <div class="form-group label-floating">
-                                                                            <label class="control-label">Pays</label>
-                                                                            <select class="form-control">
-                                                                                <option disabled="" selected=""></option>
-                                                                                <option value="Allemagne"> Allemagne </option>
-                                                                                <option value="Angleterre"> Angleterre </option>
-                                                                                <option value="Belgique"> Belgique </option>
-                                                                                <option value="Chine"> Chine </option>
-                                                                                <option value="Espagne"> Espagne </option>
-                                                                                <option value="États-Unis"> États-Unis </option>
-                                                                                <option value="France"> France </option>
-                                                                                <option value="Italie"> Italie </option>
-                                                                                <option value="Japon"> Japon </option>
-                                                                                <option value="Russie"> Russie </option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="form-group label-floating">
-                                                                            <label class="control-label is-focused">Date de naissance (jj/mm/aaaa)</label>
-                                                                            <input name="birthday" type="text" class="form-control">
-                                                                        </div>
-                                                                    </div>
+                                                                    {% include 'form/visitor.html.twig' %}
+                                                                    <h3 class="text-center">ENFANT 2</h3>
+                                                                    {% include 'form/visitor.html.twig' %}
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
