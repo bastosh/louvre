@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="wizard-navigation">
+    <ul>
+        <li><a href="#" data-toggle="tab">Étape 1</a></li>
+        <li class="active"><a href="#" data-toggle="tab">Étape 2</a></li>
+        <li><a href="#" data-toggle="tab">Confirmation</a></li>
+    </ul>
+</div>
+<div class="tab-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="info-text">Renseignez les informations demandées pour chaque visiteur.</h4>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-3">
+                <div class="controls">
+                    <form action="{{ path('checkout') }}" method="POST">
+                        <h4>Générer ici les formulaires en fonction du nombre de billets souhaité.</h4>
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-danger">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

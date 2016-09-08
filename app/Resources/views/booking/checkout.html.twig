@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="wizard-navigation">
+    <ul>
+        <li><a href="#" data-toggle="tab">Étape 1</a></li>
+        <li><a href="#" data-toggle="tab">Étape 2</a></li>
+        <li class="active"><a href="#" data-toggle="tab">Confirmation</a></li>
+    </ul>
+</div>
+<div class="tab-content">
+    <div class="row">
+        <h4 class="info-text">Vérifiez les informations et réglez votre commande !</h4>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th class="col-xs-3 text-center">Date</th>
+                <th class="col-xs-6 text-center">Billet</th>
+                <th class="col-xs-3 active text-center">Tarif</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th class="col-xs-3 text-center">xx/xx/xxxx</th>
+                <td class="col-xs-6 text-center">Tarif – Prénom Nom</td>
+                <td class="col-xs-3 text-center">xx,xx €</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th class="col-xs-3 info">&nbsp;</th>
+                <td class="col-xs-6 info text-center">Total</td>
+                <td class="col-xs-3 info text-center">xx,xx €</td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<div class="wizard-footer">
+    <div class="pull-right">
+        <input type='button' class='btn btn-finish btn-fill btn-danger btn-wd' name='finish' value='Payer' />
+    </div>
+    <div class="pull-left">
+        <a href="{{ path('index') }}" class='btn btn-default'>Ajouter un autre billet</a>
+    </div>
+    <div class="clearfix"></div>
+</div>
+{% endblock %}

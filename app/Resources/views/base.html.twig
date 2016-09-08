@@ -23,7 +23,41 @@
     {% endblock %}
 </head>
 <body>
-{% block body %}{% endblock %}
+{% for msg in app.session.flashBag.get('success') %}
+    <div class=" alert alert-success">{{ msg }}</div>
+{% endfor %}
+
+{% for msg in app.session.flashBag.get('error') %}
+    <div class=" alert alert-danger">{{ msg }}</div>
+{% endfor %}
+<div class="image-container set-full-height" style="background-image: url({{ asset('assets/img/louvre.jpg') }})">
+    <!--   Navbar  -->
+
+    <!--   Big container   -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <!--      Wizard container        -->
+                <div class="wizard-container">
+                    <div class="card wizard-card" data-color="red" id="wizard">
+                        <div class="wizard-header">
+                            <h3 class="wizard-title">
+                                Réservation
+                            </h3>
+                            <h5>Suivez les étapes et réglez&nbsp;!</h5>
+                        </div>
+                    {% block body %}{% endblock %}
+                    </div>
+                </div> <!-- wizard container -->
+            </div>
+        </div> <!-- row -->
+    </div> <!--  big container -->
+    <div class="footer">
+        <div class="container text-center">
+            © 2016 – Sébastien Pereda
+        </div>
+    </div>
+</div>
 {% block javascripts %}
 <script src="{{ asset('assets/js/jquery-2.2.4.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
