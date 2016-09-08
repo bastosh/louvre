@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class IndexType extends AbstractType
 {
-    public function BuildForm(FormBuilderInterface $builder, array $option)
+    public function buildForm(FormBuilderInterface $builder, array $option)
     {
         $builder
             ->add('day', TextType::class)

@@ -31,7 +31,6 @@ class BookingController extends Controller
         ));
     }
 
-    // Création formulaires
     /**
      * @Route("/tickets", name="tickets")
      * @Method({"GET", "POST"})
@@ -52,7 +51,6 @@ class BookingController extends Controller
         ));
     }
 
-    // Résumé de la commande
     /**
      * @Route("/checkout", name="checkout")
      * @Method("GET")
