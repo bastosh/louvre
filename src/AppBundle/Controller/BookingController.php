@@ -2,25 +2,37 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\Type\indexType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class BookingController extends Controller
 {
     /**
      * @Route("/", name="index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return $this->render('booking/index.html.twig');
+        $form = $this->createForm(indexType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $form->getData();
+            return $this->redirectToRoute('tickets');
+        }
+        return $this->render('booking/index.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
     // Création formulaires
     /**
      * @Route("/tickets", name="tickets")
-     * @Method("POST")
+     * @Method({"GET", "POST"})
      */
     public function ticketsAction()
     {

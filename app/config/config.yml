@@ -41,6 +41,8 @@ twig:
         decimals:             2
         decimal_point:        ,
         thousands_separator:  ' '
+    form_themes:
+            - 'bootstrap_3_layout.html.twig'
 
 # Doctrine Configuration
 doctrine:

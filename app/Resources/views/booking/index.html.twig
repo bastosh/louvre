@@ -16,11 +16,8 @@
         <div class="row">
             <div class="col-xs-6 col-xs-offset-3">
                 <div class="controls">
-                    <form action="{{ path('tickets') }}" method="POST">
-                        <div class="form-group label-floating">
-                            <label for="day" class="control-label">Date de la visite</label>
-                            <input id="day" class="datepicker form-control" type="text" readonly/>
-                        </div>
+                    {#<form action="{{ path('tickets') }}" method="POST">
+
                         <div class="form-group">
                             <label for="type">Type de billet</label>
                             <select id="type" class="form-control">
@@ -50,7 +47,34 @@
                         <div class="text-center">
                             <input type="submit" class="btn btn-danger">
                         </div>
-                    </form>
+                    </form>#}
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    <div class="form-group label-floating">
+                        {{ form_label(form.day, 'Date de la visite', {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(form.day, {'attr': {'class': 'datepicker form-control'}}) }} {# readonly #}
+                        {{ form_errors(form.day) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.type) }}
+                        {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.type) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.quantity) }}
+                        {{ form_widget(form.quantity, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.quantity) }}
+                    </div>
+                    <div class="form-group label-floating">
+                        {{ form_label(form.email, 'Votre adresse e-mail', {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(form.email, {'attr': {'class': ' form-control'}}) }}
+                        {{ form_errors(form.email) }}
+                    </div>
+                    <div class="text-center">
+                        {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-danger'}}) }}
+                    </div>
+                    {{ form_rest(form) }}
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>
