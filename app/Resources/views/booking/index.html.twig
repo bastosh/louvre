@@ -16,38 +16,6 @@
         <div class="row">
             <div class="col-xs-6 col-xs-offset-3">
                 <div class="controls">
-                    {#<form action="{{ path('tickets') }}" method="POST">
-
-                        <div class="form-group">
-                            <label for="type">Type de billet</label>
-                            <select id="type" class="form-control">
-                                <option>Journée</option>
-                                <option>Demi-journée</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="nombre">Nombre de visiteurs</label>
-                            <select id="nombre" class="form-control">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                            </select>
-                        </div>
-                        <div class="form-group label-floating">
-                            <label for="email" class="control-label">Votre adresse e-mail</label>
-                            <input id="email" class="form-control" type="email"/>
-                        </div>
-                        <div class="text-center">
-                            <input type="submit" class="btn btn-danger">
-                        </div>
-                    </form>#}
                     {{ form_start(form) }}
                     {{ form_errors(form) }}
                     <div class="form-group label-floating">

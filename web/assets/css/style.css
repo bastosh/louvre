@@ -1,3 +1,7 @@
 .tab-content.erreur {
     padding-top: 120px;
 }
+.visitor {
+    position: relative;
+    top: 7px;
+}

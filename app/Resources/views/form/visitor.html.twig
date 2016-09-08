@@ -1,36 +1,27 @@
-<div class="col-sm-6 visitor">
-    <div class="input-group">
-        <div class="form-group label-floating">
-            <label class="control-label">Prénom du visiteur</label>
-            <input name="firstname" type="text" class="form-control">
-        </div>
-    </div>
-    <div class="input-group">
-        <div class="form-group label-floating">
-            <label class="control-label">Nom du visiteur</label>
-            <input name="lastname" type="text" class="form-control">
-        </div>
-    </div>
+{{ form_start(visitor) }}
+{{ form_errors(visitor) }}
+<div class="form-group label-floating">
+    {{ form_label(visitor.firstname, 'Prénom du visiteur', {'label_attr': {'class': 'control-label'}}) }}
+    {{ form_widget(visitor.firstname, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(visitor.firstname) }}
 </div>
-<div class="col-sm-6 visitor">
-    <div class="form-group label-floating">
-        <label class="control-label">Pays</label>
-        <select class="form-control">
-            <option disabled="" selected=""></option>
-            <option value="Allemagne"> Allemagne </option>
-            <option value="Angleterre"> Angleterre </option>
-            <option value="Belgique"> Belgique </option>
-            <option value="Chine"> Chine </option>
-            <option value="Espagne"> Espagne </option>
-            <option value="États-Unis"> États-Unis </option>
-            <option value="France"> France </option>
-            <option value="Italie"> Italie </option>
-            <option value="Japon"> Japon </option>
-            <option value="Russie"> Russie </option>
-        </select>
-    </div>
-    <div class="form-group label-floating">
-        <label class="control-label is-focused">Date de naissance (jj/mm/aaaa)</label>
-        <input name="birthday" type="text" class="form-control">
-    </div>
+<div class="form-group label-floating">
+    {{ form_label(visitor.lastname, 'Nom du visiteur', {'label_attr': {'class': 'control-label'}}) }}
+    {{ form_widget(visitor.lastname, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(visitor.lastname) }}
 </div>
+<div class="form-group">
+    {{ form_label(visitor.country) }}
+    {{ form_widget(visitor.country, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(visitor.country) }}
+</div>
+<div class="form-group label-floating">
+    {{ form_label(visitor.birthday, 'Date de naissance (jj/mm/aaaa)', {'label_attr': {'class': 'control-label'}}) }}
+    {{ form_widget(visitor.birthday, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(visitor.birthday) }}
+</div>
+<div class="text-center">
+    {{ form_widget(visitor.Valider, {'attr': {'class': 'btn btn-danger'}}) }}
+</div>
+{{ form_rest(visitor) }}
+{{ form_end(visitor) }}

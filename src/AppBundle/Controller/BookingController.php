@@ -2,7 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Form\Type\indexType;
+use AppBundle\Form\Type\IndexType;
+use AppBundle\Form\Type\VisitorType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,9 +19,10 @@ class BookingController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $form = $this->createForm(indexType::class);
+        $form = $this->createForm(IndexType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            dump($form->getData());
             $form->getData();
             return $this->redirectToRoute('tickets');
         }
@@ -33,16 +35,27 @@ class BookingController extends Controller
     /**
      * @Route("/tickets", name="tickets")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function ticketsAction()
+    public function ticketsAction(Request $request)
     {
-        return $this->render('booking/tickets.html.twig');
+        $form = $this->createForm(VisitorType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            dump($form->getData());
+            $form->getData();
+            return $this->redirectToRoute('checkout');
+        }
+        return $this->render('booking/tickets.html.twig', array(
+            'visitor' => $form->createView()
+        ));
     }
 
     // Résumé de la commande
     /**
      * @Route("/checkout", name="checkout")
-     * @Method("POST")
+     * @Method("GET")
      */
     public function checkoutAction()
     {

@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class indexType extends AbstractType
+class IndexType extends AbstractType
 {
     public function BuildForm(FormBuilderInterface $builder, array $option)
     {
