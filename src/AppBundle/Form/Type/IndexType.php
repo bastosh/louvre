@@ -21,7 +21,9 @@ class IndexType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $option)
     {
         $builder
-            ->add('day', TextType::class)
+            ->add('day', TextType::class, [
+            'label' => 'Date de la visite'
+            ])
             ->add('type', ChoiceType::class, [
                 'choices'  => [
                     'Journée' => 'full',
@@ -30,8 +32,8 @@ class IndexType extends AbstractType
                 'label'  => 'Type de billet'
             ])
             ->add('quantity', ChoiceType::class, [
-                'label'  => 'Nombre de visiteurs',
-                'choices'  => [
+                'label' => 'Nombre de visiteurs',
+                'choices' => [
                     '1' => '1',
                     '2' => '2',
                     '3' => '3',
@@ -44,7 +46,9 @@ class IndexType extends AbstractType
                     '10' => '10'
                 ],
             ])
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'label' => 'Votre adresse e-mail'
+            ])
             ->add('Valider', SubmitType::class)
         ;
     }

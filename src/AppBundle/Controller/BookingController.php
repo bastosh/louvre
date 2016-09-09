@@ -22,7 +22,6 @@ class BookingController extends Controller
         $form = $this->createForm(IndexType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
             $form->getData();
             return $this->redirectToRoute('tickets');
         }
