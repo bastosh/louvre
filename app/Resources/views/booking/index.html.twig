@@ -20,7 +20,7 @@
                     {{ form_errors(form) }}
                     <div class="form-group label-floating">
                         {{ form_label(form.day, 'Date de la visite', {'label_attr': {'class': 'control-label'}}) }}
-                        {{ form_widget(form.day, {'attr': {'class': 'datepicker form-control'}}) }} {# readonly #}
+                        {{ form_widget(form.day, {'attr': {'class': 'datepicker form-control', 'readonly': 'readonly'}}) }}
                         {{ form_errors(form.day) }}
                     </div>
                     <div class="form-group">
