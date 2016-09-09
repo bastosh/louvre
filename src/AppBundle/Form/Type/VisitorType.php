@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -55,6 +56,10 @@ class VisitorType extends AbstractType
                 ]])
             ->add('birthday', TextType::class, [
                 'label' => 'Date de naissance (jj/mm/aaaa)'
+                ])
+            ->add('reduced', CheckboxType::class, [
+                'label' => "Je bénéficie du tarif réduit",
+                'required' => false
             ])
             //->add('Valider', SubmitType::class)
         ;

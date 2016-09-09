@@ -12,3 +12,9 @@ ul  {
 i {
     padding-left: 15px;
 }
+.tooltip-custom + .tooltip > .tooltip-inner {
+    background-color: #f44336;
+    color: #fff;
+    position: relative;
+    left: -120px;
+}

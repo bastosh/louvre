@@ -32,7 +32,7 @@
    var $addTagLink = $('<a href="#" class="btn btn-danger">Ajouter un visiteur</a>');
    var $newLinkLi = $('<li class="text-center"></li>').append($addTagLink);
 
-   jQuery(document).ready(function() {
+   $(document).ready(function() {
        // Get the ul that holds the collection of tags
        var $collectionHolder = $('ul.visitors');
 
@@ -76,14 +76,20 @@
 
        $(".form-group").addClass("label-floating is-empty");
        $(".form-group:nth-child(3)").removeClass("is-empty");
+       $(".form-group:nth-child(5)").removeClass("label-floating is-empty");
+       $(".checkbox").attr("data-toggle", "tooltip").attr("title", "Sur présentation d'un justificatif.").attr("data-placement", "right").addClass("tooltip-custom");
 
-       // handle the removal
+       // handle the removal;
        $('.remove-tag').click(function(e) {
            e.preventDefault();
            $(this).parent().remove();
            $collectionHolder.data('index', $collectionHolder.find('.visitor').length);
            return false;
        });
+
+       $(function () {
+           $('[data-toggle="tooltip"]').tooltip()
+       })
    }
 </script>
 {% endblock %}
