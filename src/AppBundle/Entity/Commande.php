@@ -49,7 +49,7 @@ class Commande
     private $tickets;
 
     /**
-     * @ORM\OneToMany(targetEntity="Visitor", mappedBy="commande", cascade={"persist"})
+     *
      */
     private $visitors;
 
