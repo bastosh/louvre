@@ -20,7 +20,33 @@
                         <h3 class="text-center visitor">Visiteur&nbsp;1</h3>
                     </div>
                     <div class="col-md-9">
-                    {% include 'form/visitor.html.twig' %}
+                        {{ form_start(visitor) }}
+                        {{ form_errors(visitor) }}
+                        <div class="form-group label-floating">
+                            {{ form_label(visitor.firstname, 'Prénom du visiteur', {'label_attr': {'class': 'control-label'}}) }}
+                            {{ form_widget(visitor.firstname, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(visitor.firstname) }}
+                        </div>
+                        <div class="form-group label-floating">
+                            {{ form_label(visitor.lastname, 'Nom du visiteur', {'label_attr': {'class': 'control-label'}}) }}
+                            {{ form_widget(visitor.lastname, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(visitor.lastname) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(visitor.country) }}
+                            {{ form_widget(visitor.country, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(visitor.country) }}
+                        </div>
+                        <div class="form-group label-floating">
+                            {{ form_label(visitor.birthday, 'Date de naissance (jj/mm/aaaa)', {'label_attr': {'class': 'control-label'}}) }}
+                            {{ form_widget(visitor.birthday, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(visitor.birthday) }}
+                        </div>
+                        <div class="text-center">
+                            {{ form_widget(visitor.Valider, {'attr': {'class': 'btn btn-danger'}}) }}
+                        </div>
+                        {{ form_rest(visitor) }}
+                        {{ form_end(visitor) }}
                     </div>
                 </div>
             </div>
