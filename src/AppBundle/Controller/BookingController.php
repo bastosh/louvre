@@ -2,8 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Commande;
+use AppBundle\Form\Type\CommandeType;
 use AppBundle\Form\Type\IndexType;
-use AppBundle\Form\Type\VisitorType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -38,15 +39,15 @@ class BookingController extends Controller
      */
     public function ticketsAction(Request $request)
     {
-        $form = $this->createForm(VisitorType::class);
+        $commande = new Commande();
+        $form = $this->createForm(CommandeType::class, $commande);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
             $form->getData();
             return $this->redirectToRoute('checkout');
         }
         return $this->render('booking/tickets.html.twig', array(
-            'visitor' => $form->createView()
+            'form' => $form->createView()
         ));
     }
 

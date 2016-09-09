@@ -19,7 +19,7 @@ class VisitorType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'label' => 'Prénom du visiteur'
+                'label' => 'Prénom du visiteur',
             ])
             ->add('lastname', TextType::class, [
                 'label' => 'Nom du visiteur'
@@ -57,17 +57,16 @@ class VisitorType extends AbstractType
             ->add('birthday', TextType::class, [
                 'label' => 'Date de naissance (jj/mm/aaaa)'
             ])
-            ->add('Valider', SubmitType::class)
+            //->add('Valider', SubmitType::class)
         ;
     }
-    
-    /**
-     * @param OptionsResolver $resolver
-     */
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Visitor'
+            'csrf_protection' => false,
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => 'visitor_form'
         ));
     }
 }

@@ -31,7 +31,7 @@ class IndexType extends AbstractType
                 ],
                 'label'  => 'Type de billet'
             ])
-            ->add('quantity', ChoiceType::class, [
+            /*->add('quantity', ChoiceType::class, [
                 'label' => 'Nombre de visiteurs',
                 'choices' => [
                     '1' => '1',
@@ -45,7 +45,7 @@ class IndexType extends AbstractType
                     '9' => '9',
                     '10' => '10'
                 ],
-            ])
+            ])*/
             ->add('email', EmailType::class, [
                 'label' => 'Votre adresse e-mail'
             ])
@@ -58,7 +58,7 @@ class IndexType extends AbstractType
         $resolver->setDefaults(array(
             'csrf_protection' => false,
             'csrf_field_name' => '_token',
-            'csrf_token_id'   => 'index_form',
+            'csrf_token_id'   => 'index_form'
         ));
     }
 }

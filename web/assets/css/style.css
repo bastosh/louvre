@@ -2,6 +2,12 @@
     padding-top: 120px;
 }
 .visitor {
-    position: relative;
-    top: 7px;
+    margin-bottom: 30px;
+}
+ul  {
+    list-style-type: none;
+    padding-left: 0;
+}
+i {
+    padding-left: 15px;
 }

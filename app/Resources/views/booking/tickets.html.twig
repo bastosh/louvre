@@ -10,45 +10,83 @@
 </div>
 <div class="tab-content">
     <div class="row">
-        <div class="col-sm-12">
-            <h4 class="info-text">Renseignez les informations demandées pour chaque visiteur.</h4>
+        <div class="col-xs-10 col-xs-offset-1">
+            <h4 class="info-text">Ajoutez des visiteurs et renseignez les informations demandées.</h4>
         </div>
         <div class="row">
             <div class="col-xs-10 col-xs-offset-1">
                 <div class="controls">
-                    <div class="col-md-3">
-                        <h3 class="text-center visitor">Visiteur&nbsp;1</h3>
-                    </div>
-                    <div class="col-md-9">
-                        {{ form_start(visitor) }}
-                        {{ form_errors(visitor) }}
-                        <div class="form-group label-floating">
-                            {{ form_label(visitor.firstname) }}
-                            {{ form_widget(visitor.firstname) }}
-                            {{ form_errors(visitor.firstname) }}
-                        </div>
-                        <div class="form-group label-floating">
-                            {{ form_label(visitor.lastname) }}
-                            {{ form_widget(visitor.lastname) }}
-                            {{ form_errors(visitor.lastname) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_row(visitor.country) }}
-                        </div>
-                        <div class="form-group label-floating">
-                            {{ form_label(visitor.birthday) }}
-                            {{ form_widget(visitor.birthday) }}
-                            {{ form_errors(visitor.birthday) }}
-                        </div>
-                        <div class="text-center">
-                            {{ form_widget(visitor.Valider, {'attr': {'class': 'btn btn-danger'}}) }}
-                        </div>
-                        {{ form_rest(visitor) }}
-                        {{ form_end(visitor) }}
-                    </div>
+                    {{ form_start(form) }}
+                        <ul class="visitors" data-prototype="{{ form_widget(form.visitors.vars.prototype)|e('html_attr') }}"></ul>
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script>
+   // setup an "add a tag" link
+   var $addTagLink = $('<a href="#" class="btn btn-danger">Ajouter un visiteur</a>');
+   var $newLinkLi = $('<li class="text-center"></li>').append($addTagLink);
+
+   jQuery(document).ready(function() {
+       // Get the ul that holds the collection of tags
+       var $collectionHolder = $('ul.visitors');
+
+       // add the "add a tag" anchor and li to the tags ul
+       $collectionHolder.append($newLinkLi);
+
+       // count the current form inputs we have (e.g. 2), use that as the new
+       // index when inserting a new item (e.g. 2)
+       $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+       $addTagLink.on('click', function(e) {
+           // prevent the link from creating a "#" on the URL
+           e.preventDefault();
+
+           // add a new tag form (see code block below)
+           addTagForm($collectionHolder, $newLinkLi);
+       });
+
+
+   });
+
+   function addTagForm($collectionHolder, $newLinkLi) {
+       // Get the data-prototype explained earlier
+       var prototype = $collectionHolder.data('prototype');
+
+       // get the new index
+       var index = $collectionHolder.data('index');
+
+       // Replace '$$name$$' in the prototype's HTML to
+       // instead be a number based on how many items we have
+       var newForm = prototype.replace(/__name__/g, index);
+
+       // increase the index with one for the next item
+       $collectionHolder.data('index', index + 1);
+
+       // Display the form in the page in an li, before the "Add a tag" link li
+       var $newFormLi = $('<li><div class="visitor"><h3 class="text-center">Visiteur ' + (index + 1) + '</h3></div></li>').append(newForm);
+
+       // also add a remove button, just for this example
+       $newFormLi.append('<a href="#" class="remove-tag btn btn-default btn-sm">Supprimer ce visiteur<i class="fa fa-trash" aria-hidden="true"></i></a>');
+
+       $newLinkLi.before($newFormLi);
+
+       $(".form-group").addClass("label-floating is-empty");
+       $(".form-group:nth-child(3)").removeClass("is-empty");
+
+       // handle the removal, just for this example
+       $('.remove-tag').click(function(e) {
+           e.preventDefault();
+
+           $(this).parent().remove();
+
+           return false;
+       });
+   }
+</script>
 {% endblock %}
