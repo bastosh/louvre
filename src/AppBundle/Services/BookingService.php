@@ -177,6 +177,7 @@ class BookingService extends Controller
         return $amount;
     }
 
+    // Retourne le nombre de billets réservés pour une date donnée (depuis le datepicker JS)
     public function getNumberTickets($day)
     {
         $str_date = $day;
@@ -185,6 +186,29 @@ class BookingService extends Controller
         $tickets = $repository->findBy(array('visitDate' => $obj_date));
         $quantity = 0;
         foreach ($tickets as $ticket) {
+            $quantity++;
+        }
+        return $quantity;
+    }
+
+    // Retourne le nombre de billets réservés pour une date donnée
+    public function getNbrTickets($day)
+    {
+        $repository = $this->em->getRepository('AppBundle:Ticket');
+        $tickets = $repository->findBy(array('visitDate' => $day));
+        $quantity = 0;
+        foreach ($tickets as $ticket) {
+            $quantity++;
+        }
+        return $quantity;
+    }
+
+    // Retourne le nombre de billets d'une commande donnée
+    public function ticketsCommande($id)
+    {
+        $commande = $this->getCommande($id);
+        $quantity = 0;
+        foreach ($commande->getTickets() as $ticket) {
             $quantity++;
         }
         return $quantity;

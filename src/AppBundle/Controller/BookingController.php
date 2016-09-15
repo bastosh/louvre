@@ -75,19 +75,25 @@ class BookingController extends Controller
      * @Route("/checkout/{id}", name="checkout")
      * @Method("GET")
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function checkoutAction($id)
     {
         $commande = $this->get('booking.service')->getCommande($id);
+        $ticketsJour = $this->get('booking.service')->getNbrTickets($commande->getVisitDate());
+        $ticketsCommande = $this->get('booking.service')->ticketsCommande($id);
         $visit = $commande->getVisitDate();
         $tickets = $commande->getTickets();
         $amount = $this->get('booking.service')->getAmount($id);
-        return $this->render('booking/checkout.html.twig', array(
-            'id' => $id,
-            'tickets' => $tickets,
-            'visit' => $visit,
-            'amount' => $amount
-        ));
+        if ($ticketsJour + $ticketsCommande <= 1000) {
+            return $this->render('booking/checkout.html.twig', array(
+                'id' => $id,
+                'tickets' => $tickets,
+                'visit' => $visit,
+                'amount' => $amount
+            ));
+        }
+        throw new \Exception("Il n'y a pas suffisamment de places disponibles pour le jour choisi. Merci de modifier votre commande");
     }
 
     /**
@@ -114,7 +120,6 @@ class BookingController extends Controller
         if ($request->isXmlHttpRequest()) {
             return new Response(1000-$tickets);
         }
-
         return new Response('This is not ajax!', 400);
     }
 }
