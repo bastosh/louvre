@@ -23,6 +23,7 @@
                         {{ form_widget(form.day) }}
                         {{ form_errors(form.day) }}
                     </div>
+                    <span id="dispo"></span>
                     <div class="form-group">
                         {{ form_row(form.type) }}
                     </div>
@@ -34,11 +35,39 @@
                     <div class="text-center">
                         {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-danger'}}) }}
                     </div>
-                    {{ form_rest(form) }}
                     {{ form_end(form) }}
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+    <script type="text/javascript">
+        $('.datepicker').datepicker({
+            orientation: 'bottom',
+            autoclose: true,
+            language: 'fr',
+            format: 'dd-mm-yyyy',
+            startDate: 'today',
+            todayHighlight: true,
+            daysOfWeekDisabled: [0,2],
+            datesDisabled: ['01/05/2017', '01/11/2017', '25/12/2017', '01/05/2019', '01/11/2019', '25/12/2019', '01/05/2020', '25/12/2020'],
+            templates: {
+                leftArrow: '<i class="fa fa-chevron-left"></i>',
+                rightArrow: '<i class="fa fa-chevron-right"></i>'
+            }
+        }).on("change", function(){
+            $.ajax({
+                url: "{{ path('ajax') }}",
+                data: 'day='+($('.datepicker').val()),
+                success: function(data) {
+                    $('#dispo').html(data+' place(s) disponible(s)'); },
+                error: function() {
+                    alert('La requête n\'a pas abouti'); }
+            });
+        });
+    </script>
 {% endblock %}

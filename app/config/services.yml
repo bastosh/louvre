@@ -14,5 +14,4 @@ parameters:
 services:
     booking.service:
         class: AppBundle\Services\BookingService
-        arguments: ["@doctrine.orm.default_entity_manager", "@service_container"]
-
+        arguments: ["@doctrine.orm.default_entity_manager"]

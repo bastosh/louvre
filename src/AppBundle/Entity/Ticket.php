@@ -22,6 +22,13 @@ class Ticket
     private $id;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="visitDate", type="date")
+     */
+    private $visitDate;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
@@ -121,6 +128,30 @@ class Ticket
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set visitDate
+     *
+     * @param \DateTime $visitDate
+     *
+     * @return Ticket
+     */
+    public function setVisitDate($visitDate)
+    {
+        $this->visitDate = $visitDate;
+
+        return $this;
+    }
+
+    /**
+     * Get visitDate
+     *
+     * @return \DateTime
+     */
+    public function getVisitDate()
+    {
+        return $this->visitDate;
     }
 
     /**

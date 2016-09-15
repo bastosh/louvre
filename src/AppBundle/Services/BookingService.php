@@ -12,19 +12,15 @@ use AppBundle\Entity\Commande;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\Ticket;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\DependencyInjection\Container;
-
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class BookingService extends Controller
 {
     protected $em;
-    protected $container;
 
-    public function __construct(EntityManager $em, Container $container)
+    public function __construct(EntityManager $em)
     {
         $this->em = $em;
-        $this->container = $container;
-
     }
 
     // ÉTAPE 1 : Instancie une nouvelle commande à partir des infos du premier formulaire
@@ -65,6 +61,7 @@ class BookingService extends Controller
     {
         $ticket = new Ticket();
         $ticket->setCommande($this->getCommande($id));
+        $ticket->setVisitDate($this->getCommande($id)->getVisitDate());
         $ticket->setFirstname($firstname);
         $ticket->setLastname($lastname);
         $ticket->setCountry($country);
@@ -121,16 +118,16 @@ class BookingService extends Controller
 
         // Tarif gratuit
         if ($age < 4) {
-            $ticket->setPrice($this->container->getParameter('tarif_gratuit'));
+            $ticket->setPrice(0);
         }
         // Tarif enfant
         elseif ($age < 12) {
             if ($type === 'full')
             {
-                $ticket->setPrice($this->container->getParameter('tarif_enfant'));
+                $ticket->setPrice(8);
             }
             else {
-                $ticket->setPrice($this->container->getParameter('tarif_enfant_demi'));
+                $ticket->setPrice(4);
             }
 
         }
@@ -139,17 +136,17 @@ class BookingService extends Controller
             if (!$reduced) {
                 if ($type === 'full')
                 {
-                    $ticket->setPrice($this->container->getParameter('tarif_normal'));
+                    $ticket->setPrice(16);
                 }
                 else {
-                    $ticket->setPrice($this->container->getParameter('tarif_normal_demi'));
+                    $ticket->setPrice(8);
                 }
             }
             else if ($type === 'full') {
-                $ticket->setPrice($this->container->getParameter('tarif_reduit'));
+                $ticket->setPrice(10);
             }
             else {
-                $ticket->setPrice($this->container->getParameter('tarif_reduit_demi'));
+                $ticket->setPrice(5);
             }
 
         }
@@ -157,10 +154,10 @@ class BookingService extends Controller
         else {
             if ($type === 'full')
             {
-                $ticket->setPrice($this->get('service_container')->getParameter('tarif_senior'));
+                $ticket->setPrice(12);
             }
             else {
-                $ticket->setPrice($this->get('service_container')->getParameter('tarif_senior_demi'));
+                $ticket->setPrice(6);
             }
         }
         $this->saveTicket($ticket);
@@ -180,4 +177,16 @@ class BookingService extends Controller
         return $amount;
     }
 
+    public function getNumberTickets($day)
+    {
+        $str_date = $day;
+        $obj_date = \DateTime::createFromFormat('d-m-yy', $str_date);
+        $repository = $this->em->getRepository('AppBundle:Ticket');
+        $tickets = $repository->findBy(array('visitDate' => $obj_date));
+        $quantity = 0;
+        foreach ($tickets as $ticket) {
+            $quantity++;
+        }
+        return $quantity;
+    }
 }
