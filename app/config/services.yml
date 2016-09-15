@@ -1,9 +1,18 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
 parameters:
-#    parameter_name: value
+    tarif_gratuit: 0
+    tarif_enfant_demi: 4
+    tarif_enfant: 8
+    tarif_reduit_demi: 5
+    tarif_reduit: 10
+    tarif_normal_demi: 8
+    tarif_normal: 16
+    tarif_senior_demi: 6
+    tarif_senior: 12
 
 services:
     booking.service:
         class: AppBundle\Services\BookingService
-        arguments: ["@doctrine.orm.default_entity_manager"]
+        arguments: ["@doctrine.orm.default_entity_manager", "@service_container"]
+
