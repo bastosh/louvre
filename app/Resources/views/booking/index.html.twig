@@ -68,6 +68,25 @@
                 error: function() {
                     alert('La requête n\'a pas abouti'); }
             });
+        }).on("change", function() {
+            var d = new Date();
+            var month = d.getMonth()+1;
+            var day = d.getDate();
+            var n = d.getHours();
+            var today =
+                    ((''+day).length<2 ? '0' : '') + day + '-' +
+                    ((''+month).length<2 ? '0' : '') + month + '-' +
+                    d.getFullYear();
+            var date = $('.datepicker').val();
+            if (today == date) {
+                if (n >= 14) {
+                    $('#index_type option[value="half"]').attr('selected', 'selected');
+                    $('#index_type option[value="full"]').attr('disabled', 'disabled');
+                }
+            } else {
+                $('#index_type option[value="full"]').attr('selected', true);
+                $('#index_type option[value="full"]').attr('disabled', false);
+            }
         });
     </script>
 {% endblock %}
