@@ -9,7 +9,7 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -21,8 +21,15 @@ class IndexType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $option)
     {
         $builder
-            ->add('day', TextType::class, [
-            'label' => 'Date de la visite'
+            ->add('day', DateType::class, [
+            'widget' => 'single_text',
+            'label' => 'Date de la visite',
+            'html5' => false,
+            'format' => 'dd-MM-yyyy',
+            'attr' => [
+                'class' => 'datepicker',
+                'readonly' => 'readonly'
+            ]
             ])
             ->add('type', ChoiceType::class, [
                 'choices'  => [
@@ -31,21 +38,6 @@ class IndexType extends AbstractType
                 ],
                 'label'  => 'Type de billet'
             ])
-            /*->add('quantity', ChoiceType::class, [
-                'label' => 'Nombre de visiteurs',
-                'choices' => [
-                    '1' => '1',
-                    '2' => '2',
-                    '3' => '3',
-                    '4' => '4',
-                    '5' => '5',
-                    '6' => '6',
-                    '7' => '7',
-                    '8' => '8',
-                    '9' => '9',
-                    '10' => '10'
-                ],
-            ])*/
             ->add('email', EmailType::class, [
                 'label' => 'Votre adresse e-mail'
             ])
@@ -57,8 +49,6 @@ class IndexType extends AbstractType
     {
         $resolver->setDefaults(array(
             'csrf_protection' => false,
-            'csrf_field_name' => '_token',
-            'csrf_token_id'   => 'index_form'
         ));
     }
 }

@@ -14,23 +14,28 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th class="col-xs-3 text-center">Date</th>
-                <th class="col-xs-6 text-center">Billet</th>
+                <th class="col-xs-3 active text-center">Date</th>
+                <th class="col-xs-5 active text-center">Billet</th>
                 <th class="col-xs-3 active text-center">Tarif</th>
+                <th class="col-xs-1 active text-center">&nbsp;</th>
             </tr>
             </thead>
             <tbody>
+            {%  for ticket in tickets %}
             <tr>
-                <th class="col-xs-3 text-center">xx/xx/xxxx</th>
-                <td class="col-xs-6 text-center">Tarif – Prénom Nom</td>
-                <td class="col-xs-3 text-center">xx,xx €</td>
+                <th class="col-xs-3 text-center">{{ visit|date("d/m/Y") }}</th>
+                <td class="col-xs-5 text-center">{{ ticket.firstname }} {{ ticket.lastname }}</td>
+                <td class="col-xs-3 text-center">{{ ticket.price|number_format }} €</td>
+                <td class="col-xs-1 text-center"><a href="{{ path('remove', {'ticketId': ticket.id, 'id': id }) }}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
             </tr>
+            {% endfor %}
             </tbody>
             <tfoot>
             <tr>
                 <th class="col-xs-3 info">&nbsp;</th>
-                <td class="col-xs-6 info text-center">Total</td>
-                <td class="col-xs-3 info text-center">xx,xx €</td>
+                <td class="col-xs-5 info text-center">Total</td>
+                <td class="col-xs-3 info text-center">{{ amount|number_format }} €</td>
+                <td class="col-xs-1 info text-center">&nbsp;</td>
             </tr>
             </tfoot>
         </table>
@@ -41,7 +46,7 @@
         <input type='button' class='btn btn-finish btn-fill btn-danger btn-wd' name='finish' value='Payer' />
     </div>
     <div class="pull-left">
-        <a href="{{ path('index') }}" class='btn btn-default'>Ajouter un autre billet</a>
+        <a href="{{ path('order', { 'id': id }) }}" class='btn btn-default'>Ajouter un autre billet</a>
     </div>
     <div class="clearfix"></div>
 </div>

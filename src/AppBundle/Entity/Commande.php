@@ -32,6 +32,14 @@ class Commande
     /**
      * @var string
      *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
@@ -39,19 +47,14 @@ class Commande
     /**
      * @var string
      *
-     * @ORM\Column(name="token", type="string", length=255, unique=true)
+     * @ORM\Column(name="token", type="string", length=255)
      */
     private $token;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="commande")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ticket", mappedBy="commande", cascade={"persist"})
      */
     private $tickets;
-
-    /**
-     *
-     */
-    private $visitors;
 
 
     /**
@@ -72,6 +75,9 @@ class Commande
     {
         $this->tickets = new ArrayCollection();
         $this->visitors = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->token = '';
+        $this->amount = 0;
     }
 
     /**
@@ -106,6 +112,22 @@ class Commande
     public function getVisitDate()
     {
         return $this->visitDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType(string $type)
+    {
+        $this->type = $type;
     }
 
     /**
@@ -181,24 +203,6 @@ class Commande
     }
 
     /**
-     * Get visitors
-     *
-     * @return ArrayCollection|Visitor[]
-     */
-    public function getVisitors()
-    {
-        return $this->visitors;
-    }
-
-    /**
-     * @param mixed $visitors
-     */
-    public function setVisitors($visitors)
-    {
-        $this->visitors = $visitors;
-    }
-
-    /**
      * Set amount
      *
      * @param float $amount
@@ -270,27 +274,4 @@ class Commande
         $this->tickets->removeElement($ticket);
     }
 
-    /**
-     * Add visitor
-     *
-     * @param \AppBundle\Entity\Visitor $visitor
-     *
-     * @return Commande
-     */
-    public function addVisitor(\AppBundle\Entity\Visitor $visitor)
-    {
-        $this->visitors[] = $visitor;
-
-        return $this;
-    }
-
-    /**
-     * Remove visitor
-     *
-     * @param \AppBundle\Entity\Visitor $visitor
-     */
-    public function removeVisitor(\AppBundle\Entity\Visitor $visitor)
-    {
-        $this->visitors->removeElement($visitor);
-    }
 }

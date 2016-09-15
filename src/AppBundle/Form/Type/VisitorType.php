@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -54,14 +55,14 @@ class VisitorType extends AbstractType
                     'Tunisie' => 'Tunisie',
                     'Autre' => 'Autre',
                 ]])
-            ->add('birthday', TextType::class, [
-                'label' => 'Date de naissance (jj/mm/aaaa)'
+            ->add('birthday', BirthdayType::class, [
+                'label' => 'Date de naissance',
+                'format' => 'dd-MM-yyyy'
                 ])
             ->add('reduced', CheckboxType::class, [
-                'label' => "Je bénéficie du tarif réduit",
+                'label' => 'Je bénéficie du tarif réduit',
                 'required' => false
             ])
-            //->add('Valider', SubmitType::class)
         ;
     }
 
@@ -69,8 +70,6 @@ class VisitorType extends AbstractType
     {
         $resolver->setDefaults(array(
             'csrf_protection' => false,
-            'csrf_field_name' => '_token',
-            'csrf_token_id'   => 'visitor_form'
         ));
     }
 }

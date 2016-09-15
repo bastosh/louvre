@@ -22,23 +22,78 @@ class Ticket
     private $id;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="visitDate", type="date")
+     * @ORM\Column(name="firstname", type="string", length=255)
      */
-    private $visitDate;
+    private $firstname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\Column(name="lastname", type="string", length=255)
      */
-    private $type;
+    private $lastname;
 
     /**
-     * @ORM\Column(type="string")
+     * @var string
+     *
+     * @ORM\Column(name="country", type="string", length=255)
      */
-    private $visitor;
+    private $country;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="birthday", type="date")
+     */
+    private $birthday;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="age", type="integer", nullable=true)
+     */
+    private $age;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="reduced", type="boolean", nullable=true)
+     */
+    private $reduced;
+
+    /**
+     * @return boolean
+     */
+    public function isReduced(): bool
+    {
+        return $this->reduced;
+    }
+
+    /**
+     * @param boolean $reduced
+     */
+    public function setReduced(bool $reduced)
+    {
+        $this->reduced = $reduced;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAge(): int
+    {
+        return $this->age;
+    }
+
+    /**
+     * @param int $age
+     */
+    public function setAge(int $age)
+    {
+        $this->age = $age;
+    }
 
     /**
      * @var float
@@ -48,21 +103,14 @@ class Ticket
     private $price;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="qrcode", type="string", length=255)
-     */
-    private $qrcode;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Commande", inversedBy="tickets")
      */
     private $commande;
 
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $token;
+    public function __construct()
+    {
+        $this->price = 12;
+    }
 
 
     /**
@@ -73,78 +121,6 @@ class Ticket
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set visitDate
-     *
-     * @param \DateTime $visitDate
-     *
-     * @return Ticket
-     */
-    public function setVisitDate($visitDate)
-    {
-        $this->visitDate = $visitDate;
-
-        return $this;
-    }
-
-    /**
-     * Get visitDate
-     *
-     * @return \DateTime
-     */
-    public function getVisitDate()
-    {
-        return $this->visitDate;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Ticket
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Set visitor
-     *
-     * @param string $visitor
-     *
-     * @return Ticket
-     */
-    public function setVisitor($visitor)
-    {
-        $this->visitor = $visitor;
-
-        return $this;
-    }
-
-    /**
-     * Get visitor
-     *
-     * @return string
-     */
-    public function getVisitor()
-    {
-        return $this->visitor;
     }
 
     /**
@@ -172,30 +148,6 @@ class Ticket
     }
 
     /**
-     * Set qrcode
-     *
-     * @param string $qrcode
-     *
-     * @return Ticket
-     */
-    public function setQrcode($qrcode)
-    {
-        $this->qrcode = $qrcode;
-
-        return $this;
-    }
-
-    /**
-     * Get qrcode
-     *
-     * @return string
-     */
-    public function getQrcode()
-    {
-        return $this->qrcode;
-    }
-
-    /**
      * Set commande
      *
      */
@@ -217,21 +169,100 @@ class Ticket
     }
 
     /**
-     * @return mixed
+     * Set firstname
+     *
+     * @param string $firstname
+     *
+     * @return Ticket
      */
-    public function getToken()
+    public function setFirstname($firstname)
     {
-        return $this->token;
+        $this->firstname = $firstname;
+
+        return $this;
     }
 
     /**
-     * @param mixed $token
+     * Get firstname
+     *
+     * @return string
      */
-    public function setToken($token)
+    public function getFirstname()
     {
-        $this->token = $token;
+        return $this->firstname;
     }
 
+    /**
+     * Set lastname
+     *
+     * @param string $lastname
+     *
+     * @return Ticket
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    /**
+     * Get lastname
+     *
+     * @return string
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     *
+     * @return Ticket
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Set birthday
+     *
+     * @param \DateTime $birthday
+     *
+     * @return Ticket
+     */
+    public function setBirthday($birthday)
+    {
+        $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    /**
+     * Get birthday
+     *
+     * @return \DateTime
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
 
 }
 

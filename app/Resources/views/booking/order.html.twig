@@ -18,6 +18,7 @@
                 <div class="controls">
                     {{ form_start(form) }}
                         <ul class="visitors" data-prototype="{{ form_widget(form.visitors.vars.prototype)|e('html_attr') }}"></ul>
+                    {{ form_rest(form) }}
                     {{ form_end(form) }}
                 </div>
             </div>
@@ -29,7 +30,7 @@
 {{ parent() }}
 <script>
    // setup an "add a tag" link
-   var $addTagLink = $('<a href="#" class="btn btn-danger">Ajouter un visiteur</a>');
+   var $addTagLink = $('<a href="#" class="btn btn-primary">Ajouter un visiteur</a>');
    var $newLinkLi = $('<li class="text-center"></li>').append($addTagLink);
 
    $(document).ready(function() {
@@ -51,6 +52,7 @@
            addTagForm($collectionHolder, $newLinkLi);
        });
 
+       $(".form-group:last").addClass("text-center");
 
    });
 
@@ -74,9 +76,6 @@
 
        $newLinkLi.before($newFormLi);
 
-       $(".form-group").addClass("label-floating is-empty");
-       $(".form-group:nth-child(3)").removeClass("is-empty");
-       $(".form-group:nth-child(5)").removeClass("label-floating is-empty");
        $(".checkbox").attr("data-toggle", "tooltip").attr("title", "Sur présentation d'un justificatif.").attr("data-placement", "right").addClass("tooltip-custom");
 
        // handle the removal;
