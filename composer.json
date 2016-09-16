@@ -31,7 +31,8 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "ext-gd": "*",
         "ext-intl": "*",
-        "symfony/var-dumper": "^3.1"
+        "symfony/var-dumper": "^3.1",
+        "friendsofsymfony/user-bundle": "~2.0@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

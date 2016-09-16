@@ -31,8 +31,57 @@
     <div class=" alert alert-danger">{{ msg }}</div>
 {% endfor %}
 <div class="image-container set-full-height" style="background-image: url({{ asset('assets/img/louvre.jpg') }})">
-    <!--   Navbar  -->
-
+    <div class="container-fluid">
+        <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#horaires">
+            Horaires
+        </button>
+        <button type="button" class="btn btn-danger btn-lg pull-right" data-toggle="modal" data-target="#tarifs">
+            Tarifs
+        </button>
+    </div>
+    <!-- Modal horaires -->
+    <div class="modal fade" id="horaires" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="wizard-title text-center" id="myModalLabel">LES HORAIRES</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <P>Le musée est ouvert tous les jours sauf le mardi, de 9h00 à 18h00.</P>
+                    <p>Le musée est fermé les 1er mai, 1er novembre et 25 décembre.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal tarifs -->
+    <div class="modal fade" id="tarifs" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="wizard-title text-center" id="myModalLabel">LES TARIFS</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>Tarifs journée</h4>
+                    <p>Entrée gratuite : enfants de moins de 4 ans.</p>
+                    <p>Tarif enfant : 8 euros (de 4 à 11 ans).</p>
+                    <p>Tarif normal : 16 euros (de 12 à 59 ans).</p>
+                    <p>Tarif senoir : 12 euros (à partir de 60 ans).</p>
+                    <p>Tarif réduit : 10 euros (étudiant, employé du musée, d’un service du ministère de la Culture, militaire, demandeur d'emploi, sur présentation d'un justificatif).</p>
+                    <br>
+                    <h4>Tarifs demi-journée</h4>
+                    <p>Le billet demi-journée permet de rentrer à partir de 14h en bénéficiant d'une réduction de 50% sur le prix de base.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--   Big container   -->
     <div class="container">
         <div class="row">

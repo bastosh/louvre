@@ -57,9 +57,8 @@ class BookingController extends Controller
             foreach ($visitors as $visitor) {
                 $ticket = $this->get('booking.service')->createTicket($id, $visitor['firstname'], $visitor['lastname'], $visitor['country'], $visitor['birthday'], $visitor['reduced']);
                 $this->get('booking.service')->saveTicket($ticket);
-                $ticketId = $ticket->getId();
-                $this->get('booking.service')->getVisitorAge($ticketId);
-                $this->get('booking.service')->getPrice($ticketId);
+                $this->get('booking.service')->getVisitorAge($ticket->getId());
+                $this->get('booking.service')->getPrice($ticket->getId());
             }
             return $this->redirectToRoute('checkout', array (
                 'id' => $id
@@ -80,20 +79,16 @@ class BookingController extends Controller
     public function checkoutAction($id)
     {
         $commande = $this->get('booking.service')->getCommande($id);
-        $ticketsJour = $this->get('booking.service')->getNbrTickets($commande->getVisitDate());
-        $ticketsCommande = $this->get('booking.service')->ticketsCommande($id);
-        $visit = $commande->getVisitDate();
-        $tickets = $commande->getTickets();
-        $amount = $this->get('booking.service')->getAmount($id);
-        if ($ticketsJour + $ticketsCommande <= 1000) {
+        if ($this->get('booking.service')->getNbrTickets($commande->getVisitDate()) + $this->get('booking.service')->ticketsCommande($id) <= 1000) {
             return $this->render('booking/checkout.html.twig', array(
                 'id' => $id,
-                'tickets' => $tickets,
-                'visit' => $visit,
-                'amount' => $amount
+                'tickets' => $commande->getTickets(),
+                'visit' => $commande->getVisitDate(),
+                'email' => $commande->getEmail(),
+                'amount' => $this->get('booking.service')->getAmount($id)
             ));
         }
-        throw new \Exception("Il n'y a pas suffisamment de places disponibles pour le jour choisi. Merci de modifier votre commande");
+        throw new \Exception("Il n'y a pas suffisamment de places disponibles pour le jour choisi. Merci de modifier votre commande.");
     }
 
     /**

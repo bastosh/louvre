@@ -189,7 +189,7 @@ h2.title {
 
 /*      Here the code for the wizard           */
 .wizard-container {
-  padding-top: 100px;
+  padding-top: 20px;
   z-index: 3; }
 
 .wizard-card {
