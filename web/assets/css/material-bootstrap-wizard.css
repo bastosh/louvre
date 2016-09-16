@@ -978,7 +978,7 @@ select.form-control {
   .btn.btn-round {
     border-radius: 30px; }
   .btn:not(.btn-just-icon):not(.btn-fab) .fa {
-    font-size: 18px;
+    font-size: 30px;
     margin-top: -2px;
     position: relative;
     top: 2px; }

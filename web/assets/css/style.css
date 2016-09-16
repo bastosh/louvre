@@ -22,6 +22,12 @@ i {
     position: relative;
     left: -6px;
 }
+.fa-home {
+    padding: 1px;
+}
+#home {
+    padding: 12px;
+}
 #dispo{
     color: #9c27b0;
 }
