@@ -44,11 +44,4 @@ class IndexType extends AbstractType
             ->add('Valider', SubmitType::class)
         ;
     }
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'csrf_protection' => false,
-        ));
-    }
 }
