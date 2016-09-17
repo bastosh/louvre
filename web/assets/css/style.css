@@ -1,5 +1,16 @@
-.tab-content.erreur {
-    padding-top: 120px;
+.home {
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+.home-nav {
+    margin-bottom: 70px;
+}
+#logo-stripe{
+    width: 150px;
+    margin-bottom: 10px;
+}
+.stripe {
+    margin-top: 80px;
 }
 .visitor {
     margin-top: 40px;
@@ -21,6 +32,11 @@ i {
 .fa-trash {
     position: relative;
     left: -6px;
+    color: #f44336;
+}
+.btn:not(.btn-just-icon):not(.btn-fab) .fa-trash {
+    font-size: 20px;
+    color: #fff;
 }
 .fa-home {
     padding: 1px;
@@ -30,4 +46,16 @@ i {
 }
 #dispo{
     color: #9c27b0;
+}
+button span {
+    min-height: 0;
+}
+.alert {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+.alert-success {
+    background-color: #9c27b0;
+    color: #fff;
+    border: none;
 }

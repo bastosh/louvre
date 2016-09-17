@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 class BookingController extends Controller
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/billeterie", name="billetterie")
      * @Method({"GET", "POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -72,13 +72,28 @@ class BookingController extends Controller
     /**
      * @param $id
      * @Route("/checkout/{id}", name="checkout")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function checkoutAction($id)
+    public function checkoutAction(Request $request, $id)
     {
+
         $commande = $this->get('booking.service')->getCommande($id);
+        $token = $request->request->get('stripeToken');
+        if ($request->isMethod('POST')) {
+            \Stripe\Stripe::setApiKey('sk_test_fjA7u1npiGjqQE8PG5BpxX01');
+
+            \Stripe\Charge::create(array(
+                'amount' => $commande->getAmount() * 100,
+                'currency' => 'EUR',
+                'source' => $token, // obtained with Stripe.js
+                'description' => 'Charge for '.$commande->getEmail()
+            ));
+            $this->addFlash('success', 'Merci pour votre commande, vous allez recevoir les billets par e-mail.');
+            return $this->redirectToRoute('index');
+        }
+
         if ($this->get('booking.service')->getNbrTickets($commande->getVisitDate()) + $this->get('booking.service')->ticketsCommande($id) <= 1000) {
             return $this->render('booking/checkout.html.twig', array(
                 'id' => $id,

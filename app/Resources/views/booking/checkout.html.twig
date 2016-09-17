@@ -44,11 +44,33 @@
 </div>
 <div class="wizard-footer">
     <div class="pull-right">
-        <input type='button' class='btn btn-finish btn-fill btn-danger btn-wd' name='finish' value='Payer' />
+        <form action="" method="POST">
+            <script
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_3baem0miu45dcpD6bFdf46pf"
+                    data-amount="{{ amount * 100 }}"
+                    data-name="Billetterie du Louvre"
+                    data-description="Paiement sécurisé"
+                    data-image="{{ asset('apple-touch-icon.png') }}"
+                    data-locale="auto"
+                    data-email="{{ email }}"
+                    data-label="Régler la commande"
+                    data-zip-code="false"
+                    data-currency="eur">
+            </script>
+        </form>
     </div>
     <div class="pull-left">
         <a href="{{ path('order', { 'id': id }) }}" class='btn btn-default'>Ajouter un autre billet</a>
     </div>
     <div class="clearfix"></div>
 </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(".stripe-button-el").addClass("btn btn-danger").removeClass("stripe-button-el");
+        $("button span").css("min-height", "");
+    </script>
 {% endblock %}
