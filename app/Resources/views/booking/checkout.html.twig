@@ -47,7 +47,7 @@
         <form action="" method="POST">
             <script
                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                    data-key="pk_test_3baem0miu45dcpD6bFdf46pf"
+                    data-key="{{ stripe_public_key }}"
                     data-amount="{{ amount * 100 }}"
                     data-name="Billetterie du Louvre"
                     data-description="Paiement sécurisé"

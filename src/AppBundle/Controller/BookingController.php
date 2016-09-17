@@ -82,7 +82,7 @@ class BookingController extends Controller
         $commande = $this->get('booking.service')->getCommande($id);
         $token = $request->request->get('stripeToken');
         if ($request->isMethod('POST')) {
-            \Stripe\Stripe::setApiKey('sk_test_fjA7u1npiGjqQE8PG5BpxX01');
+            \Stripe\Stripe::setApiKey($this->getParameter('stripe_secret_key'));
 
             \Stripe\Charge::create(array(
                 'amount' => $commande->getAmount() * 100,
@@ -100,7 +100,8 @@ class BookingController extends Controller
                 'tickets' => $commande->getTickets(),
                 'visit' => $commande->getVisitDate(),
                 'email' => $commande->getEmail(),
-                'amount' => $this->get('booking.service')->getAmount($id)
+                'amount' => $this->get('booking.service')->getAmount($id),
+                'stripe_public_key' => $this->getParameter('stripe_public_key')
             ));
         }
         throw new \Exception("Il n'y a pas suffisamment de places disponibles pour le jour choisi. Merci de modifier votre commande.");
