@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\User;
 use AppBundle\Form\Type\CommandeType;
 use AppBundle\Form\Type\IndexType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -30,8 +31,8 @@ class BookingController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $commande = $this->get('booking.service')->createCommande($data['day'], $data['type'], $data['email']);
-            $this->get('booking.service')->saveCommande($commande);
-            $this->get('booking.service')->setToken($commande->getId());
+            $user = new User($commande->getEmail());
+            $this->get('user.service')->createUser($user);
             return $this->redirectToRoute('order', array(
                 'id' => $commande->getId(),
             ));
@@ -55,10 +56,7 @@ class BookingController extends Controller
             $data = $form->getData();
             $visitors = $data['visitors'];
             foreach ($visitors as $visitor) {
-                $ticket = $this->get('booking.service')->createTicket($id, $visitor['firstname'], $visitor['lastname'], $visitor['country'], $visitor['birthday'], $visitor['reduced']);
-                $this->get('booking.service')->saveTicket($ticket);
-                $this->get('booking.service')->getVisitorAge($ticket->getId());
-                $this->get('booking.service')->getPrice($ticket->getId());
+                $this->get('booking.service')->createTicket($id, $visitor['firstname'], $visitor['lastname'], $visitor['country'], $visitor['birthday'], $visitor['reduced']);
             }
             return $this->redirectToRoute('checkout', array (
                 'id' => $id
@@ -78,22 +76,13 @@ class BookingController extends Controller
      */
     public function checkoutAction(Request $request, $id)
     {
-
         $commande = $this->get('booking.service')->getCommande($id);
         $token = $request->request->get('stripeToken');
         if ($request->isMethod('POST')) {
-            \Stripe\Stripe::setApiKey($this->getParameter('stripe_secret_key'));
-
-            \Stripe\Charge::create(array(
-                'amount' => $commande->getAmount() * 100,
-                'currency' => 'EUR',
-                'source' => $token, // obtained with Stripe.js
-                'description' => 'Charge for '.$commande->getEmail()
-            ));
+            $this->get('stripe.service')->createCharge($commande->getAmount(), $token, $commande->getEmail());
             $this->addFlash('success', 'Merci pour votre commande, vous allez recevoir les billets par e-mail.');
             return $this->redirectToRoute('index');
         }
-
         if ($this->get('booking.service')->getNbrTickets($commande->getVisitDate()) + $this->get('booking.service')->ticketsCommande($id) <= 1000) {
             return $this->render('booking/checkout.html.twig', array(
                 'id' => $id,

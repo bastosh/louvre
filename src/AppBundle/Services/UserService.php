@@ -9,7 +9,22 @@
 namespace AppBundle\Services;
 
 
-class UserService
+use AppBundle\Entity\User;
+use Doctrine\ORM\EntityManager;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+class UserService extends Controller
 {
 
+    protected $em;
+
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
+    public function createUser(User $user){
+        $this->em->persist($user);
+        $this->em->flush();
+    }
 }

@@ -58,8 +58,42 @@ class User extends BaseUser
      */
     protected $id;
 
-    public function __construct()
+    /**
+     * @ORM\Column(type="string", length=190, unique=true, nullable=true)
+     */
+    private $stripeCustomerId;
+
+    public function __construct($email)
     {
         parent::__construct();
+        $this->setEmail($email);
+        $this->setUsername($email);
+        $this->setPassword('louvre');
+        $this->setConfirmationToken('louvre');
+        $this->setEnabled(true);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStripeCustomerId()
+    {
+        return $this->stripeCustomerId;
+    }
+
+    /**
+     * @param mixed $stripeCustomerId
+     */
+    public function setStripeCustomerId($stripeCustomerId)
+    {
+        $this->stripeCustomerId = $stripeCustomerId;
     }
 }

@@ -12,15 +12,25 @@ use AppBundle\Entity\Commande;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\Ticket;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class BookingService extends Controller
 {
     protected $em;
+    protected $gratuit;
+    protected $enfant;
+    protected $reduit;
+    protected $normal;
+    protected $senior;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, $gratuit, $enfant, $reduit, $normal, $senior)
     {
         $this->em = $em;
+        $this->gratuit = $gratuit;
+        $this->enfant = $enfant;
+        $this->reduit = $reduit;
+        $this->normal = $normal;
+        $this->senior = $senior;
+
     }
 
     // ÉTAPE 1 : Instancie une nouvelle commande à partir des infos du premier formulaire
@@ -30,6 +40,8 @@ class BookingService extends Controller
         $commande->setVisitDate($day);
         $commande->setType($type);
         $commande->setEmail($email);
+        $this->saveCommande($commande);
+        $this->setToken($commande->getId());
         return $commande;
     }
 
@@ -67,7 +79,10 @@ class BookingService extends Controller
         $ticket->setCountry($country);
         $ticket->setBirthday($birthday);
         $ticket->setReduced($reduced);
-        return $ticket;
+        $this->saveTicket($ticket);
+        $ticketId = $ticket->getId();
+        $this->getVisitorAge($ticketId);
+        $this->getPrice($ticketId);
     }
 
     // Persiste le ticket en base de données
@@ -118,16 +133,16 @@ class BookingService extends Controller
 
         // Tarif gratuit
         if ($age < 4) {
-            $ticket->setPrice(0);
+            $ticket->setPrice($this->gratuit);
         }
         // Tarif enfant
         elseif ($age < 12) {
             if ($type === 'full')
             {
-                $ticket->setPrice(8);
+                $ticket->setPrice($this->enfant);
             }
             else {
-                $ticket->setPrice(4);
+                $ticket->setPrice($this->enfant/2);
             }
 
         }
@@ -136,17 +151,17 @@ class BookingService extends Controller
             if (!$reduced) {
                 if ($type === 'full')
                 {
-                    $ticket->setPrice(16);
+                    $ticket->setPrice($this->normal);
                 }
                 else {
-                    $ticket->setPrice(8);
+                    $ticket->setPrice($this->normal/2);
                 }
             }
             else if ($type === 'full') {
-                $ticket->setPrice(10);
+                $ticket->setPrice($this->reduit);
             }
             else {
-                $ticket->setPrice(5);
+                $ticket->setPrice($this->reduit/2);
             }
 
         }
@@ -154,10 +169,10 @@ class BookingService extends Controller
         else {
             if ($type === 'full')
             {
-                $ticket->setPrice(12);
+                $ticket->setPrice($this->senior);
             }
             else {
-                $ticket->setPrice(6);
+                $ticket->setPrice($this->senior/2);
             }
         }
         $this->saveTicket($ticket);
