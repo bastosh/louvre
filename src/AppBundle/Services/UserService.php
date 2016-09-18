@@ -15,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class UserService extends Controller
 {
-
     protected $em;
 
     public function __construct(EntityManager $em)

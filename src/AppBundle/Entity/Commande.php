@@ -56,6 +56,10 @@ class Commande
      */
     private $tickets;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     */
+    private $user;
 
     /**
      * @var float
@@ -200,6 +204,22 @@ class Commande
     public function getTickets()
     {
         return $this->tickets;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
     }
 
     /**

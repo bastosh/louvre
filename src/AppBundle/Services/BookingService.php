@@ -107,14 +107,14 @@ class BookingService extends Controller
         $this->em->flush();
     }
 
-    // Calcule la différence entre la date du jour et la date de naissance saisie
+    // Calcule la différence entre la date de la visite et la date de naissance saisie
     // Persiste l'âge du visiteur en base de données
     public function getVisitorAge($ticketId)
     {
         $ticket = $this->getTicket($ticketId);
         $birthday = $ticket->getBirthday();
-        $now = new \DateTime();
-        $interval = $now->diff($birthday);
+        $visit = $ticket->getVisitDate();
+        $interval = $visit->diff($birthday);
         $age = $interval->y;
         $ticket->setAge($age);
         $this->saveTicket($ticket);
@@ -227,5 +227,23 @@ class BookingService extends Controller
             $quantity++;
         }
         return $quantity;
+    }
+
+    // Retourne true si c'est la première commande du visiteur, false s'il a déjà commandé auparavant
+    public function isFirstCommande($email)
+    {
+        $repository = $this->em->getRepository('AppBundle:Commande');
+        $commandes = $repository->findBy(array('email' => $email));
+        $quantity = 0;
+        foreach ($commandes as $commande) {
+            $quantity++;
+        }
+        return ($quantity === 1);
+    }
+
+    public function getUserByEmail($email)
+    {
+        $repository = $this->em->getRepository('AppBundle:User');
+        return $repository->findOneBy(array('email' => $email));
     }
 }

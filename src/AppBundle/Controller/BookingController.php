@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 class BookingController extends Controller
 {
     /**
-     * @Route("/billeterie", name="billetterie")
+     * @Route("/billetterie", name="billetterie")
      * @Method({"GET", "POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -31,8 +31,16 @@ class BookingController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $commande = $this->get('booking.service')->createCommande($data['day'], $data['type'], $data['email']);
-            $user = new User($commande->getEmail());
-            $this->get('user.service')->createUser($user);
+            $isNew = $this->get('booking.service')->isFirstCommande($commande->getEmail());
+            if ($isNew) {
+                $user = new User($commande->getEmail());
+                $this->get('user.service')->createUser($user);
+                $commande->setUser($user);
+                $this->get('booking.service')->saveCommande($commande);
+            }
+            $user = $this->get('booking.service')->getUserByEmail($commande->getEmail());
+            $commande->setUser($user);
+            $this->get('booking.service')->saveCommande($commande);
             return $this->redirectToRoute('order', array(
                 'id' => $commande->getId(),
             ));
@@ -43,9 +51,10 @@ class BookingController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param $id
      * @Route("/order/{id}", name="order")
      * @Method({"GET", "POST"})
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function orderAction(Request $request, $id)
@@ -69,6 +78,7 @@ class BookingController extends Controller
 
     /**
      * @param $id
+     * @param Request $request
      * @Route("/checkout/{id}", name="checkout")
      * @Method({"GET", "POST"})
      * @return \Symfony\Component\HttpFoundation\Response
@@ -81,6 +91,21 @@ class BookingController extends Controller
         if ($request->isMethod('POST')) {
             $this->get('stripe.service')->createCharge($commande->getAmount(), $token, $commande->getEmail());
             $this->addFlash('success', 'Merci pour votre commande, vous allez recevoir les billets par e-mail.');
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Votre réservation pour le musée du Louvre')
+                ->setFrom('reservation@louvre.com')
+                ->setTo($commande->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'email/reservation.html.twig',
+                        array(
+                            'commande' => $commande,
+                            'tickets' => $commande->getTickets()
+                        )
+                    ),
+                    'text/html'
+                );
+            $this->get('mailer')->send($message);
             return $this->redirectToRoute('index');
         }
         if ($this->get('booking.service')->getNbrTickets($commande->getVisitDate()) + $this->get('booking.service')->ticketsCommande($id) <= 1000) {
@@ -98,6 +123,7 @@ class BookingController extends Controller
 
     /**
      * @param $ticketId
+     * @param $id
      * @Route("/remove/{id}/{ticketId}", name="remove")
      * @Method("GET")
      * @return \Symfony\Component\HttpFoundation\Response
@@ -110,8 +136,10 @@ class BookingController extends Controller
     }
 
     /**
+     * @param Request $request
      * @Route("/ajax", name="ajax")
      * @Method("GET")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function ajaxAction(Request $request)
     {
