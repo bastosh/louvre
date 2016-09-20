@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class BookingController
@@ -130,21 +129,5 @@ class BookingController extends Controller
         return $this->redirectToRoute('checkout', array (
             'id' => $id
         ));
-    }
-
-    /**
-     * @param Request $request
-     * @Route("/ajax", name="ajax_dispo")
-     * @Method("GET")
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function ajaxDispoAction(Request $request)
-    {
-        $day = $request->query->get('day');
-        $tickets = $this->get('booking.service')->getNumberTickets($day);
-        if ($request->isXmlHttpRequest()) {
-            return new Response(1000-$tickets);
-        }
-        return new Response('This is not ajax!', 400);
     }
 }
