@@ -246,4 +246,5 @@ class BookingService extends Controller
         $repository = $this->em->getRepository('AppBundle:User');
         return $repository->findOneBy(array('email' => $email));
     }
+
 }
