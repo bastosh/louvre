@@ -198,7 +198,7 @@ class BookingService extends Controller
         $str_date = $day;
         $obj_date = \DateTime::createFromFormat('d-m-yy', $str_date);
         $repository = $this->em->getRepository('AppBundle:Ticket');
-        $tickets = $repository->findBy(array('visitDate' => $obj_date));
+        $tickets = $repository->findBy(array('visitDate' => $obj_date, 'status' => true));
         $quantity = 0;
         foreach ($tickets as $ticket) {
             $quantity++;
@@ -210,7 +210,7 @@ class BookingService extends Controller
     public function getNbrTickets($day)
     {
         $repository = $this->em->getRepository('AppBundle:Ticket');
-        $tickets = $repository->findBy(array('visitDate' => $day));
+        $tickets = $repository->findBy(array('visitDate' => $day, 'status' => true));
         $quantity = 0;
         foreach ($tickets as $ticket) {
             $quantity++;
@@ -241,10 +241,15 @@ class BookingService extends Controller
         return ($quantity === 1);
     }
 
-    public function getUserByEmail($email)
+    // Marque les billets comme réservés une fois le paiement effectué
+    public function changeStatus($id)
     {
-        $repository = $this->em->getRepository('AppBundle:User');
-        return $repository->findOneBy(array('email' => $email));
-    }
+        $commande = $this->getCommande($id);
+        foreach ($commande->getTickets() as $ticket)
+        {
+            $ticket->setStatus(true);
+            $this->saveTicket($ticket);
+        }
 
+    }
 }

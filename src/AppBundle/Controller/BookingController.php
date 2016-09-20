@@ -2,8 +2,6 @@
 
 namespace AppBundle\Controller;
 
-
-use AppBundle\Entity\User;
 use AppBundle\Form\Type\CommandeType;
 use AppBundle\Form\Type\IndexType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -31,16 +29,6 @@ class BookingController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $commande = $this->get('booking.service')->createCommande($data['day'], $data['type'], $data['email']);
-            $isNew = $this->get('booking.service')->isFirstCommande($commande->getEmail());
-            if ($isNew) {
-                $user = new User($commande->getEmail());
-                $this->get('user.service')->createUser($user);
-                $commande->setUser($user);
-                $this->get('booking.service')->saveCommande($commande);
-            }
-            $user = $this->get('booking.service')->getUserByEmail($commande->getEmail());
-            $commande->setUser($user);
-            $this->get('booking.service')->saveCommande($commande);
             return $this->redirectToRoute('order', array(
                 'id' => $commande->getId(),
             ));
@@ -79,7 +67,7 @@ class BookingController extends Controller
     /**
      * @param $id
      * @param Request $request
-     * @Route("/checkout/{id}", name="checkout")
+     * @Route("/checkout/{id}", name="checkout", schemes={"%secure_channel%"})
      * @Method({"GET", "POST"})
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
@@ -88,25 +76,33 @@ class BookingController extends Controller
     {
         $commande = $this->get('booking.service')->getCommande($id);
         $token = $request->request->get('stripeToken');
+        $error = false;
         if ($request->isMethod('POST')) {
-            $this->get('stripe.service')->createCharge($commande->getAmount(), $token, $commande->getEmail());
-            $this->addFlash('success', 'Merci pour votre commande, vous allez recevoir les billets par e-mail.');
-            $message = \Swift_Message::newInstance()
-                ->setSubject('Votre réservation pour le musée du Louvre')
-                ->setFrom('reservation@louvre.com')
-                ->setTo($commande->getEmail())
-                ->setBody(
-                    $this->renderView(
-                        'email/reservation.html.twig',
-                        array(
-                            'commande' => $commande,
-                            'tickets' => $commande->getTickets()
-                        )
-                    ),
-                    'text/html'
-                );
-            $this->get('mailer')->send($message);
-            return $this->redirectToRoute('index');
+            try {
+                $this->get('stripe.service')->createCharge($commande->getAmount(), $token, $commande->getEmail());
+            } catch (\Stripe\Error\Card $e) {
+                $error = 'Un problème est survenu : '.$e->getMessage();
+            }
+            if (!$error) {
+                $this->get('booking.service')->changeStatus($commande->getId());
+                $this->addFlash('success', 'Merci pour votre commande, vous allez recevoir les billets par e-mail.');
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Votre réservation pour le musée du Louvre')
+                    ->setFrom('reservation@louvre.com')
+                    ->setTo($commande->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'email/reservation.html.twig',
+                            array(
+                                'commande' => $commande,
+                                'tickets' => $commande->getTickets()
+                            )
+                        ),
+                        'text/html'
+                    );
+                $this->get('mailer')->send($message);
+                return $this->redirectToRoute('index');
+            }
         }
         if ($this->get('booking.service')->getNbrTickets($commande->getVisitDate()) + $this->get('booking.service')->ticketsCommande($id) <= 1000) {
             return $this->render('booking/checkout.html.twig', array(
@@ -115,7 +111,8 @@ class BookingController extends Controller
                 'visit' => $commande->getVisitDate(),
                 'email' => $commande->getEmail(),
                 'amount' => $this->get('booking.service')->getAmount($id),
-                'stripe_public_key' => $this->getParameter('stripe_public_key')
+                'stripe_public_key' => $this->getParameter('stripe_public_key'),
+                'error' => $error
             ));
         }
         throw new \Exception("Il n'y a pas suffisamment de places disponibles pour le jour choisi. Merci de modifier votre commande.");
@@ -137,11 +134,11 @@ class BookingController extends Controller
 
     /**
      * @param Request $request
-     * @Route("/ajax", name="ajax")
+     * @Route("/ajax", name="ajax_dispo")
      * @Method("GET")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function ajaxAction(Request $request)
+    public function ajaxDispoAction(Request $request)
     {
         $day = $request->query->get('day');
         $tickets = $this->get('booking.service')->getNumberTickets($day);

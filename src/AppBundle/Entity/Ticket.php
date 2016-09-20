@@ -71,6 +71,29 @@ class Ticket
     private $reduced;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="status", type="boolean")
+     */
+    private $status = false;
+
+    /**
+     * @return boolean
+     */
+    public function isStatus(): bool
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param boolean $status
+     */
+    public function setStatus(bool $status)
+    {
+        $this->status = $status;
+    }
+
+    /**
      * @return boolean
      */
     public function isReduced(): bool

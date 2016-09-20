@@ -11,6 +11,7 @@
 <div class="tab-content">
     <div class="row">
         <h4 class="info-text">Vérifiez les informations et réglez votre commande !</h4>
+        <div class="text-center alert alert-danger {{ error ? '' : 'hidden'}}">{{ error }}</div>
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -56,6 +57,7 @@
                     data-email="{{ email }}"
                     data-label="Régler la commande"
                     data-zip-code="false"
+                    data-allow-remember-me="false"
                     data-currency="eur">
             </script>
         </form>

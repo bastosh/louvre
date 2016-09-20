@@ -11,9 +11,7 @@ services:
     booking.service:
         class: AppBundle\Services\BookingService
         arguments: ["@doctrine.orm.default_entity_manager", "%tarif_gratuit%", "%tarif_enfant%", "%tarif_reduit%", "%tarif_normal%", "%tarif_senior%"]
-    user.service:
-        class: AppBundle\Services\UserService
-        arguments: ["@doctrine.orm.default_entity_manager"]
     stripe.service:
         class: AppBundle\Services\StripeService
         arguments: ["%stripe_secret_key%"]
+

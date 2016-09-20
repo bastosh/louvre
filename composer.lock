@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9e198430811ec20ceafc43d4bb238f43",
-    "content-hash": "95f029237081f69c9ae95d192ab515cb",
+    "hash": "f89dfcdc68c56bfa1e00984ab7a0975c",
+    "content-hash": "e92fdfe2d342ed86ea5a1aff9969ecaf",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2557,6 +2557,57 @@
                 "transliterator"
             ],
             "time": "2015-09-28 16:26:35"
+        },
+        {
+            "name": "crysalead/kahlan",
+            "version": "2.5.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crysalead/kahlan.git",
+                "reference": "64e48c213ee3af4d7d6fe1c13d907f77f11ca5d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crysalead/kahlan/zipball/64e48c213ee3af4d7d6fe1c13d907f77f11ca5d4",
+                "reference": "64e48c213ee3af4d7d6fe1c13d907f77f11ca5d4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "bin": [
+                "bin/kahlan"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kahlan\\": "src/"
+                },
+                "files": [
+                    "src/init.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CrysaLEAD"
+                }
+            ],
+            "description": "Behavior-Driven Development (BDD) library.",
+            "keywords": [
+                "BDD",
+                "Behavior-Driven Development",
+                "Monkey Patching",
+                "TDD",
+                "mock",
+                "stub",
+                "testing",
+                "unit test"
+            ],
+            "time": "2016-08-18 13:29:17"
         },
         {
             "name": "fabpot/goutte",

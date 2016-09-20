@@ -41,14 +41,6 @@ class CommandeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($ticket->getCommande(), $commande->getId());
     }
 
-    public function testGetUser()
-    {
-        $user = new User('user@test.com');
-        $commande = new Commande();
-        $commande->setUser($user);
-        $this->assertNotNull($commande->getUser());
-    }
-
     public function testGetCreatedAt()
     {
         $commande = new Commande();

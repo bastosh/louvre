@@ -24,6 +24,7 @@
                         {{ form_errors(form.day) }}
                     </div>
                     <span id="dispo"></span>
+                    <span id="en-cours"></span>
                     <div class="form-group">
                         {{ form_row(form.type) }}
                     </div>
@@ -62,7 +63,7 @@
             }
         }).on("change", function(){
             $.ajax({
-                url: "{{ path('ajax') }}",
+                url: "{{ path('ajax_dispo') }}",
                 data: 'day='+($('.datepicker').val()),
                 success: function(data) {
                     $('#dispo').html(data+' place(s) disponible(s)'); },

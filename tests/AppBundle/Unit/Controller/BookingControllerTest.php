@@ -8,23 +8,10 @@
 
 namespace AppBundle\Unit\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class BookingControllerTest extends WebTestCase
 {
-    public function testIndexAction()
-    {
-        $client = static::createClient();
-
-        $client->request('POST', '/submit', array(
-            'day' => new \DateTime('tomorrow'),
-            'type' => 'full',
-            'email' => 'test@gmail.com'
-        ));
-
-        $client->followRedirects();
-    }
 
     public function testOrderAction()
     {
