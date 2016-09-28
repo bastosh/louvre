@@ -2,7 +2,7 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    database_host:     eu-cdbr-west-01.cleardb.com
+    database_host:     us-cdbr-iron-east-04.cleardb.net
     database_port:     ~
     database_name:     heroku_5d1195fcd5d1d03
     database_user:     b51dbeb7aa5c27
