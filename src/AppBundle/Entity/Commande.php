@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Commande
@@ -24,32 +25,37 @@ class Commande
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="visitDate", type="date")
+     * @Assert\Date()
      */
     private $visitDate;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="type", type="string", length=255)
+     * @Assert\NotNull()
      */
     private $type;
 
 
     /**
      * @var string
-     *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\Email()
      */
     private $email;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="token", type="string", length=255)
      */
     private $token;
+
+    /**
+     * @var string
+     * @ORM\Column(name="session", type="string", length=255)
+     */
+    private $session;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ticket", mappedBy="commande", cascade={"persist"})
@@ -58,7 +64,6 @@ class Commande
 
     /**
      * @var float
-     *
      * @ORM\Column(name="amount", type="float")
      */
     private $amount;
@@ -175,6 +180,22 @@ class Commande
     public function getToken()
     {
         return $this->token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSession()
+    {
+        return $this->session;
+    }
+
+    /**
+     * @param mixed $session
+     */
+    public function setSession($session)
+    {
+        $this->session = $session;
     }
 
     /**

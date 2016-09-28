@@ -1,37 +1,3 @@
-/*! =========================================================
- *
- * Material Bootstrap Wizard - V1.0.0
- *
- * =========================================================
- *
- * Copyright 2016 Creative Tim (http://creative-tim.com)
- *
- *
- *                       _oo0oo_
- *                      o8888888o
- *                      88" . "88
- *                      (| -_- |)
- *                      0\  =  /0
- *                    ___/`---'\___
- *                  .' \|     |// '.
- *                 / \|||  :  |||// \
- *                / _||||| -:- |||||- \
- *               |   | \\  -  /// |   |
- *               | \_|  ''\---/''  |_/ |
- *               \  .-\__  '-'  ___/-. /
- *             ___'. .'  /--.--\  `. .'___
- *          ."" '<  `.___\_<|>_/___.' >' "".
- *         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
- *         \  \ `_.   \_ __\ /__ _/   .-` /  /
- *     =====`-.____`.___ \_____/___.-`___.-'=====
- *                       `=---='
- *
- *     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *
- *               Buddha Bless:  "No Bugs"
- *
- * ========================================================= */
-
 // Material Bootstrap Wizard Functions
 
 searchVisible = 0;
@@ -49,15 +15,11 @@ $(document).ready(function(){
 		  rules: {
 		    firstname: {
 		      required: true,
-		      minlength: 3
+		      minlength: 2
 		    },
 		    lastname: {
 		      required: true,
-		      minlength: 3
-		    },
-		    email: {
-		      required: true,
-		      minlength: 3,
+		      minlength: 2
 		    }
         },
 
@@ -145,49 +107,7 @@ $(document).ready(function(){
             refreshAnimation($wizard, index);
         }
   	});
-
-
-    // Prepare the preview for profile picture
-    $("#wizard-picture").change(function(){
-        readURL(this);
-    });
-
-    $('[data-toggle="wizard-radio"]').click(function(){
-        wizard = $(this).closest('.wizard-card');
-        wizard.find('[data-toggle="wizard-radio"]').removeClass('active');
-        $(this).addClass('active');
-        $(wizard).find('[type="radio"]').removeAttr('checked');
-        $(this).find('[type="radio"]').attr('checked','true');
-    });
-
-    $('[data-toggle="wizard-checkbox"]').click(function(){
-        if( $(this).hasClass('active')){
-            $(this).removeClass('active');
-            $(this).find('[type="checkbox"]').removeAttr('checked');
-        } else {
-            $(this).addClass('active');
-            $(this).find('[type="checkbox"]').attr('checked','true');
-        }
-    });
-
-    $('.set-full-height').css('height', 'auto');
-
 });
-
-
-
- //Function to show image before upload
-
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
 
 $(window).resize(function(){
     $('.wizard-card').each(function(){
@@ -222,34 +142,3 @@ function refreshAnimation($wizard, index){
 
     });
 }
-
-materialDesign = {
-
-    checkScrollForTransparentNavbar: debounce(function() {
-                if($(document).scrollTop() > 260 ) {
-                    if(transparent) {
-                        transparent = false;
-                        $('.navbar-color-on-scroll').removeClass('navbar-transparent');
-                    }
-                } else {
-                    if( !transparent ) {
-                        transparent = true;
-                        $('.navbar-color-on-scroll').addClass('navbar-transparent');
-                    }
-                }
-        }, 17)
-
-}
-
-function debounce(func, wait, immediate) {
-	var timeout;
-	return function() {
-		var context = this, args = arguments;
-		clearTimeout(timeout);
-		timeout = setTimeout(function() {
-			timeout = null;
-			if (!immediate) func.apply(context, args);
-		}, wait);
-		if (immediate && !timeout) func.apply(context, args);
-	};
-};

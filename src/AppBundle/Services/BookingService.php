@@ -34,9 +34,10 @@ class BookingService extends Controller
     }
 
     // ÉTAPE 1 : Instancie une nouvelle commande à partir des infos du premier formulaire
-    public function createCommande($day, $type, $email)
+    public function createCommande($session, $day, $type, $email)
     {
         $commande = new Commande();
+        $commande->setSession($session);
         $commande->setVisitDate($day);
         $commande->setType($type);
         $commande->setEmail($email);
@@ -250,6 +251,11 @@ class BookingService extends Controller
             $ticket->setStatus(true);
             $this->saveTicket($ticket);
         }
+    }
 
+    public function getSession($id)
+    {
+        $commande = $this->getCommande($id);
+        return $commande->getSession();
     }
 }

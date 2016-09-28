@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Ticket
@@ -23,56 +24,53 @@ class Ticket
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="visitDate", type="date")
+     * @Assert\Date()
      */
     private $visitDate;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="firstname", type="string", length=255)
+     * @Assert\Length(min="2")
      */
     private $firstname;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="lastname", type="string", length=255)
+     * @Assert\Length(min="2")
      */
     private $lastname;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="country", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $country;
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="birthday", type="date")
+     * @Assert\Date()
      */
     private $birthday;
 
     /**
      * @var integer
-     *
      * @ORM\Column(name="age", type="integer", nullable=true)
      */
     private $age;
 
     /**
      * @var bool
-     *
      * @ORM\Column(name="reduced", type="boolean", nullable=true)
      */
     private $reduced;
 
     /**
      * @var bool
-     *
      * @ORM\Column(name="status", type="boolean")
      */
     private $status = false;
