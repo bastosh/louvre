@@ -104,9 +104,6 @@ class BookingController extends Controller
                         'text/html'
                     );
                 $this->get('mailer')->send($message);
-                $response = new Response();
-                $response->headers->clearCookie('louvre');
-                $response->send();
                 return $this->redirectToRoute('index');
             }
             if ($this->get('booking.service')->getNbrTickets($commande->getVisitDate()) + $this->get('booking.service')->ticketsCommande($id) <= 1000) {

@@ -2,11 +2,11 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    database_host:     127.0.0.1
-    database_port:     '8889'
-    database_name:     symfony
-    database_user:     root
-    database_password: root
+    database_host:     eu-cdbr-west-01.cleardb.com
+    database_port:     ~
+    database_name:     heroku_5d1195fcd5d1d03
+    database_user:     b51dbeb7aa5c27
+    database_password: cfb008ff
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
@@ -21,5 +21,4 @@ parameters:
     stripe_secret_key: sk_test_XXX
     stripe_public_key: pk_test_XXX
 
-    secure_channel: http
-
+    secure_channel: https
