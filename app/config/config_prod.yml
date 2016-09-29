@@ -21,7 +21,10 @@ monolog:
             type:  console
 
 swiftmailer:
-    delivery_address: sebastien.pereda@gmail.com
-    transport: gmail
-    username:  '%mailer_user%'
-    password:  '%mailer_password%'
+    spool:     { type: memory }
+    transport: smtp
+    host:      mailtrap.io
+    username:  049088982aa0da
+    password:  5c9c074ad1c523
+    auth_mode: cram-md5
+    port: 2525

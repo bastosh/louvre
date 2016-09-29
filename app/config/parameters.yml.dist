@@ -1,24 +1,23 @@
-# This file is a "template" of what your parameters.yml file should look like
-# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
-# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
     database_host:     us-cdbr-iron-east-04.cleardb.net
     database_port:     ~
     database_name:     heroku_5d1195fcd5d1d03
     database_user:     b51dbeb7aa5c27
     database_password: cfb008ff
-    # You should uncomment this if you want use pdo_sqlite
-    # database_path: "%kernel.root_dir%/data.db3"
 
     mailer_transport:  smtp
     mailer_host:       smtp.free.fr
     mailer_user:       ~
     mailer_password:   ~
 
-    # A secret key that's used to generate certain security-related tokens
+    robot_email:  app55877211@heroku.com
+    contact_email: billetterie@louvre.fr
+    sender_name: Billetterie du Musée du Louvre
+
     secret:            fedbda7b7f838a17a7da395cd0a074254995ab85
 
     stripe_secret_key: sk_test_fjA7u1npiGjqQE8PG5BpxX01
     stripe_public_key: pk_test_3baem0miu45dcpD6bFdf46pf
 
     secure_channel: http
+
