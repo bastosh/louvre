@@ -90,7 +90,7 @@ class BookingController extends Controller
                 $this->addFlash('success', 'Merci pour votre commande, vous allez recevoir les billets par e-mail.');
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Votre réservation pour le musée du Louvre')
-                    ->setFrom('reservation@louvre.com')
+                    ->setFrom('reservation@louvre.fr')
                     ->setTo($commande->getEmail())
                     ->setBody(
                         $this->renderView(

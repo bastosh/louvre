@@ -1,11 +1,11 @@
 imports:
     - { resource: config.yml }
 
-#doctrine:
-#    orm:
-#        metadata_cache_driver: apc
-#        result_cache_driver: apc
-#        query_cache_driver: apc
+doctrine:
+    orm:
+        metadata_cache_driver: apc
+        result_cache_driver: apc
+        query_cache_driver: apc
 
 monolog:
     handlers:
@@ -23,8 +23,8 @@ monolog:
 swiftmailer:
     spool:     { type: memory }
     transport: smtp
-    host:      mailtrap.io
-    username:  049088982aa0da
-    password:  5c9c074ad1c523
+    host:      '%mailer_host%'
+    username:  '%mailer_user%'
+    password:  '%mailer_password%'
     auth_mode: cram-md5
     port: 2525

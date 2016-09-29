@@ -6,9 +6,9 @@ parameters:
     database_password: cfb008ff
 
     mailer_transport:  smtp
-    mailer_host:       smtp.free.fr
-    mailer_user:       ~
-    mailer_password:   ~
+    mailer_host:       mailtrap.io
+    mailer_user:       049088982aa0da
+    mailer_password:   5c9c074ad1c523
 
     robot_email:  app55877211@heroku.com
     contact_email: billetterie@louvre.fr
