@@ -36,6 +36,11 @@ class BookingService extends Controller
     // ÉTAPE 1 : Instancie une nouvelle commande à partir des infos du premier formulaire
     public function createCommande($session, $day, $type, $email)
     {
+        $today = new \DateTime('today');
+        $hour = date('H');
+        if ($day == $today AND $type === 'full' AND $hour > 14) {
+            return false;
+        }
         $commande = new Commande();
         $commande->setSession($session);
         $commande->setVisitDate($day);
@@ -228,18 +233,6 @@ class BookingService extends Controller
             $quantity++;
         }
         return $quantity;
-    }
-
-    // Retourne true si c'est la première commande du visiteur, false s'il a déjà commandé auparavant
-    public function isFirstCommande($email)
-    {
-        $repository = $this->em->getRepository('AppBundle:Commande');
-        $commandes = $repository->findBy(array('email' => $email));
-        $quantity = 0;
-        foreach ($commandes as $commande) {
-            $quantity++;
-        }
-        return ($quantity === 1);
     }
 
     // Marque les billets comme réservés une fois le paiement effectué

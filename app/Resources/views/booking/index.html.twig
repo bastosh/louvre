@@ -33,6 +33,9 @@
                         {{ form_errors(form.email) }}
                     </div>
                     <div class="text-center">
+                        <div class="alert alert-danger {{ error ? '' : 'hidden' }}">{{ error }}</div>
+                    </div>
+                    <div class="text-center">
                         {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-danger'}}) }}
                     </div>
                     {{ form_rest(form) }}

@@ -30,12 +30,19 @@ class BookingController extends Controller
             $session = $request->cookies->get('louvre');
             $data = $form->getData();
             $commande = $this->get('booking.service')->createCommande($session, $data['day'], $data['type'], $data['email']);
-            return $this->redirectToRoute('order', array(
-                'id' => $commande->getId(),
+            if ($commande) {
+                return $this->redirectToRoute('order', array(
+                    'id' => $commande->getId(),
+                ));
+            }
+            return $this->render('booking/index.html.twig', array(
+                'form' => $form->createView(),
+                'error' => 'Le billet journée n\'est plus disponible après 14h.'
             ));
         }
         return $this->render('booking/index.html.twig', array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'error' => false
         ));
     }
 
