@@ -7,7 +7,6 @@ use AppBundle\Form\Type\IndexType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
@@ -68,7 +67,7 @@ class BookingController extends Controller
                 'form' => $form->createView(),
             ));
         }
-        throw new AccessDeniedException("Vous n'avez pas la permission d'accéder à cette page.");
+        return $this->redirectToRoute('index');
     }
 
     /**
@@ -84,26 +83,34 @@ class BookingController extends Controller
         if ($this->get('booking.service')->getSession($id) === $request->cookies->get('louvre')) {
             $commande = $this->get('booking.service')->getCommande($id);
             $token = $request->request->get('stripeToken');
+            $error = false;
             if ($request->isMethod('POST')) {
-                $this->get('stripe.service')->createCharge($commande->getAmount(), $token, $commande->getEmail());
-                $this->get('booking.service')->changeStatus($commande->getId());
-                $this->addFlash('success', 'Merci pour votre commande, vous allez recevoir les billets par e-mail.');
-                $message = \Swift_Message::newInstance()
-                    ->setSubject('Votre réservation pour le musée du Louvre')
-                    ->setFrom('reservation@louvre.fr')
-                    ->setTo($commande->getEmail())
-                    ->setBody(
-                        $this->renderView(
-                            'email/reservation.html.twig',
-                            array(
-                                'commande' => $commande,
-                                'tickets' => $commande->getTickets()
-                            )
-                        ),
-                        'text/html'
-                    );
-                $this->get('mailer')->send($message);
-                return $this->redirectToRoute('index');
+                try {
+                    $this->get('stripe.service')->createCharge($commande->getAmount(), $token, $commande->getEmail());
+                }
+                catch (\Stripe\Error\Card $e) {
+                    $error = 'Un problème est survenu : '.$e->getMessage();
+                }
+                if (!$error) {
+                    $this->get('booking.service')->changeStatus($commande->getId());
+                    $this->addFlash('success', 'Merci pour votre commande, vous allez recevoir les billets par e-mail.');
+                    $message = \Swift_Message::newInstance()
+                        ->setSubject('Votre réservation pour le musée du Louvre')
+                        ->setFrom('reservation@louvre.fr')
+                        ->setTo($commande->getEmail())
+                        ->setBody(
+                            $this->renderView(
+                                'email/reservation.html.twig',
+                                array(
+                                    'commande' => $commande,
+                                    'tickets' => $commande->getTickets()
+                                )
+                            ),
+                            'text/html'
+                        );
+                    $this->get('mailer')->send($message);
+                    return $this->redirectToRoute('index');
+                }
             }
             if ($this->get('booking.service')->getNbrTickets($commande->getVisitDate()) + $this->get('booking.service')->ticketsCommande($id) <= 1000) {
                 return $this->render('booking/checkout.html.twig', array(
@@ -113,11 +120,12 @@ class BookingController extends Controller
                     'email' => $commande->getEmail(),
                     'amount' => $this->get('booking.service')->getAmount($id),
                     'stripe_public_key' => $this->getParameter('stripe_public_key'),
+                    'error' => $error
                 ));
             }
             throw new ConflictHttpException("Il n'y a plus suffisamment de places disponibles pour le jour choisi, nous ne pouvons traiter votre commande.");
         }
-        throw new AccessDeniedException("Vous n'avez pas la permission d'accéder à cette page.");
+        return $this->redirectToRoute('index');
     }
 
     /**

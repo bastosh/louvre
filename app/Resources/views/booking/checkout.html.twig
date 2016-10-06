@@ -42,6 +42,11 @@
         <h5 class="text-center">Votre adresse e-mail : <strong>{{ email }}</strong></h5>
     </div>
 </div>
+<div class="row">
+    <div class="text-center">
+        <div class="alert alert-danger {{ error ? '' : 'hidden' }}">{{ error }}</div>
+    </div>
+</div>
 <div class="wizard-footer">
     <div class="pull-right">
         <form action="" method="POST">
