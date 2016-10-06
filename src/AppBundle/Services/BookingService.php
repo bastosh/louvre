@@ -38,7 +38,7 @@ class BookingService extends Controller
     {
         $today = new \DateTime('today');
         $hour = date('H');
-        if ($day == $today AND $type === 'full' AND $hour > 14) {
+        if ($day == $today && $type === 'full' && $hour > 14) {
             return false;
         }
         $commande = new Commande();
