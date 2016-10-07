@@ -23,7 +23,6 @@ class IndexType extends AbstractType
             ->add('day', DateType::class, [
             'widget' => 'single_text',
             'label' => 'Date de la visite',
-            'html5' => false,
             'format' => 'dd-MM-yyyy',
             'attr' => [
                 'class' => 'datepicker',

@@ -29,4 +29,42 @@
 {% block javascripts %}
 {{ parent() }}
 <script src="{{ asset('assets/js/formCollection.js') }}"></script>
+<script>
+    $("[name=commande]").validate({
+        rules: {
+            "commande[visitors][0][firstname]": {
+                required: true,
+                minlength: 2
+            },
+            "commande[visitors][0][lastname]": {
+                required: true,
+                minlength: 2
+            },
+            "commande[visitors][1][firstname]": {
+                required: true,
+                minlength: 2
+            },
+            "commande[visitors][1][lastname]": {
+                required: true,
+                minlength: 2
+            },
+            "commande[visitors][2][firstname]": {
+                required: true,
+                minlength: 2
+            },
+            "commande[visitors][2][lastname]": {
+                required: true,
+                minlength: 2
+            },
+            "commande[visitors][3][firstname]": {
+                required: true,
+                minlength: 2
+            },
+            "commande[visitors][3][lastname]": {
+                required: true,
+                minlength: 2
+            }
+        }
+    });
+</script>
 {% endblock %}

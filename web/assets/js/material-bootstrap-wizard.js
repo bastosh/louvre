@@ -12,34 +12,38 @@ $(document).ready(function(){
 
     // Code for the Validator
     var $validator = $('.wizard-card form').validate({
-		  rules: {
-		    firstname: {
-		      required: true,
-		      minlength: 2
-		    },
-		    lastname: {
-		      required: true,
-		      minlength: 2
-		    }
+        rules: {
+            firstname: {
+                required: true,
+                minlength: 2
+            },
+            lastname: {
+                required: true,
+                minlength: 2
+            },
+            email: {
+                required: true,
+                email: true
+            }
         },
 
         errorPlacement: function(error, element) {
             $(element).parent('div').addClass('has-error');
-         }
-	});
+        }
+    });
 
     // Wizard Initialization
-  	$('.wizard-card').bootstrapWizard({
+    $('.wizard-card').bootstrapWizard({
         'tabClass': 'nav nav-pills',
         'nextSelector': '.btn-next',
         'previousSelector': '.btn-previous',
 
         onNext: function(tab, navigation, index) {
-        	var $valid = $('.wizard-card form').valid();
-        	if(!$valid) {
-        		$validator.focusInvalid();
-        		return false;
-        	}
+            var $valid = $('.wizard-card form').valid();
+            if(!$valid) {
+                $validator.focusInvalid();
+                return false;
+            }
         },
 
         onInit : function(tab, navigation, index){

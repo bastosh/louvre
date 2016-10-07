@@ -33,7 +33,7 @@ class Commande
     /**
      * @var string
      * @ORM\Column(name="type", type="string", length=255)
-     * @Assert\NotNull()
+     * @Assert\Choice({"full", "half"})
      */
     private $type;
 

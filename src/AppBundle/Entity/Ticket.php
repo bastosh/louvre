@@ -32,14 +32,16 @@ class Ticket
     /**
      * @var string
      * @ORM\Column(name="firstname", type="string", length=255)
-     * @Assert\Length(min="2")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=2)
      */
     private $firstname;
 
     /**
      * @var string
      * @ORM\Column(name="lastname", type="string", length=255)
-     * @Assert\Length(min="2")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=2)
      */
     private $lastname;
 

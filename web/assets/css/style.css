@@ -59,3 +59,6 @@ button span {
     color: #fff;
     border: none;
 }
+.error {
+    color: #f44336!important;
+}
